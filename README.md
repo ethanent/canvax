@@ -12,7 +12,7 @@ It's really simple! Just insert the JS file like so after installing.
 ```html
 <!-- ... -->
 <head>
-	<script src="node_modules/canvaxjs/canvax.min.js" defer></script>
+	<script src="node_modules/canvaxjs/canvax.min.js"></script>
 </head>
 <!-- ... -->
 ```
