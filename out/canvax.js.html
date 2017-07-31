@@ -1,14 +1,42 @@
-/*
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: canvax.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: canvax.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/*
 
 Canvax.JS
-
-License information (OMv2-FO): https://github.com/omnent/omnent-licenses/blob/master/licenses/OMv2-FO.txt
 
 Copyright 2017 Ethan Davis
 
 Permission is hereby granted, for free, to any person obtaining a copy of this software and associated documentation files (collectively "the Software" or "THE SOFTWARE"), to (without restriction) use, modify, copy, publish, execute, distribute, sublicense, and sell the Software and to allow people who gain access to the Software to do the same as long as this entire license and the above copyright notice are included in all copies or portions of the Software.
 
 NOTWITHSTANDING ANYTHING IN CONTRADICTION, THE AUTHORS AND COPYRIGHT HOLDERS OF THE SOFTWARE SHALL UNDER NO CIRCUMSTANCES BE HELD LIABLE FOR ANY DAMAGES, CLAIM, OR OTHER LIABILITY RELATED TO, IN CONNECTION WITH, OR CAUSED BY USE OR DISTRIBUTION OF THE SOFTWARE. THE SOFTWARE IS PROVIDED "AS-IS" AND IS NOT PROVIDED WITH WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, NONINFRINGEMENT, AND ANY WARRANTY ARISING OUR OF PRIOR COURSE OF DEALING AND USAGE OF TRADE.
+
+License information: https://github.com/omnent/omnent-licenses/blob/master/licenses/OMv2-FO.txt
 
 */
 
@@ -30,7 +58,7 @@ const canvax = {
 			return obj instanceof HTMLElement;
 		}
 		catch (err) {
-			return (typeof obj === "object" && obj.hasOwnProperty("nodeType"));
+			return (typeof obj === "object" &amp;&amp; obj.hasOwnProperty("nodeType"));
 		}
 	},
 	/**
@@ -51,7 +79,7 @@ const canvax = {
 					ctx.fillStyle = entity.backgroundColor;
 					ctx.fillRect(entity.x, entity.y, entity.width, entity.height);
 				}
-				if (entity.borderWeight !== "0" && entity.borderColor !== "none") {
+				if (entity.borderWeight !== "0" &amp;&amp; entity.borderColor !== "none") {
 					ctx.strokeStyle = entity.borderColor;
 					ctx.lineWidth = entity.borderWeight;
 					ctx.strokeRect(entity.x, entity.y, entity.width, entity.height);
@@ -64,7 +92,7 @@ const canvax = {
 					ctx.fillStyle = entity.backgroundColor;
 					ctx.fill();
 				}
-				if (entity.borderWeight !== "0" && entity.borderColor !== "none") {
+				if (entity.borderWeight !== "0" &amp;&amp; entity.borderColor !== "none") {
 					ctx.strokeStyle = entity.borderColor;
 					ctx.lineWidth = entity.borderWeight;
 					ctx.stroke();
@@ -80,10 +108,10 @@ const canvax = {
 	* @private
 	* @function
 	* @param {canvax.Renderer} renderer
-	* @param {Array.<canvax.Rectangle|canvax.Circle>} entities
+	* @param {Array.&lt;canvax.Rectangle|canvax.Circle>} entities
 	*/
 	"_renderEntitiesToCanvas": (renderer, entities) => {
-		for (let i = 0; i < entities.length; i++) {
+		for (let i = 0; i &lt; entities.length; i++) {
 			canvax._renderEntityToCanvas(renderer, entities[i]);
 		}
 	},
@@ -95,7 +123,7 @@ const canvax = {
 	* @public
 	* @function
 	* @param {HTMLCanvasElement} canvas - Canvas element
-	* @property {Array.<canvax.Rectangle|canvax.Circle>} entities
+	* @property {Array.&lt;canvax.Rectangle|canvax.Circle>} entities
 	* @property {HTMLCanvasElement} element
 	* @property {CanvasRenderingContext2D} ctx
 	* @property {function} add - (renderEntity): Adds an entity to the canvax Renderer
@@ -103,7 +131,7 @@ const canvax = {
 	* @property {function} render - (): Renders all entities to the Renderer canvas
 	*/
 	"Renderer": function(element) {
-		if (canvax._isElement(element) && element.getContext) {
+		if (canvax._isElement(element) &amp;&amp; element.getContext) {
 			this.entities = [];
 			this.element = element;
 			this.ctx = element.getContext("2d");
@@ -145,7 +173,7 @@ const canvax = {
 	* @property {function} setSize - (width, height)
 	*/
 	"Rectangle": function(x, y, width, height, backgroundColor, borderColor, borderWeight) {
-		if (x && y && width && height) {
+		if (x &amp;&amp; y &amp;&amp; width &amp;&amp; height) {
 			this.type = "Rectangle";
 
 			this.x = x;
@@ -192,7 +220,7 @@ const canvax = {
 	* @property {function} setPosition - (x, y)
 	*/
 	"Circle": function(x, y, radius, backgroundColor, borderColor, borderWeight) {
-		if (x && y && radius) {
+		if (x &amp;&amp; y &amp;&amp; radius) {
 			this.type = "Circle";
 
 			this.x = x;
@@ -230,4 +258,26 @@ const canvax = {
 			throw new Error("Missing entity method.");
 		}
 	}
-};
+};</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="canvax.Circle.html">Circle</a></li><li><a href="canvax.Entity.html">Entity</a></li><li><a href="canvax.Rectangle.html">Rectangle</a></li></ul><h3>Namespaces</h3><ul><li><a href="canvax.html">canvax</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.3</a> on Sun Jul 30 2017 17:50:47 GMT-0700 (PDT)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
