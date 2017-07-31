@@ -29,3 +29,7 @@ Let's render a rectangle on the canvas. Super simple.
 game.add(new canvax.Rectangle(0, 0, 100, 100));
 game.render();
 ```
+
+### Full Documentation
+
+You can find the full documentation over [here](https://futuristiccake.github.io/canvax/)!

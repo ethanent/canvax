@@ -114,7 +114,7 @@ const canvax = {
 				ctx.drawImage(imageSource, entity.x, entity.y, entity.width, entity.height);
 				break;
 			case "CustomEntity":
-				entity.entityMethod(ctx);
+				entity.entityMethod(ctx, entity.properties);
 				break;
 			default:
 				break;
@@ -395,13 +395,16 @@ const canvax = {
 	* Returns a custom entity.
 	* @public
 	* @class
-	* @param {function} customEntityMethod
+	* @param {function} customEntityMethod - (CanvasRenderingContext2D, properties)
+	* @param {Object} properties - Set of custom properties to pass to customEntityMethod on render
 	*/
-	"Entity": function(customEntityMethod) {
+	"Entity": function(customEntityMethod, properties) {
 		if (customEntityMethod) {
 			this.type = "CustomEntity";
 
 			this.entityMethod = customEntityMethod;
+
+			this.properties = properties || {};
 		}
 		else {
 			throw new Error("Missing entity method.");
