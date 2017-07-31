@@ -45,8 +45,6 @@ const canvax = {
 	* @param {canvax.Rectangle|canvax.Circle} entity
 	*/
 	"_renderEntityToCanvas": (renderer, entity) => {
-		// TODO render whatever
-
 		var ctx = renderer.ctx;
 
 		switch (entity.type) {

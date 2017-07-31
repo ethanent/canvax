@@ -1,0 +1,28 @@
+{
+  "name": "canvaxjs",
+  "version": "0.0.1",
+  "description": "Simple, lightweight, entity-based canvas library",
+  "main": "canvax.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FuturisticCake/canvax.git"
+  },
+  "keywords": [
+    "canvas",
+    "html5",
+    "js",
+    "web",
+    "render",
+    "canvax"
+  ],
+  "author": "Ethan Davis",
+  "license": "SEE LICENSE IN LICENSE.md",
+  "bugs": {
+    "url": "https://github.com/FuturisticCake/canvax/issues"
+  },
+  "homepage": "https://github.com/FuturisticCake/canvax#readme"
+}

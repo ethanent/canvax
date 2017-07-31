@@ -3,6 +3,8 @@
 
 ---
 
+[Full documentation](https://futuristiccake.github.io/canvax/) | [NPM](https://www.npmjs.com/package/canvaxjs)
+
 ### Use canvax
 
 It's super simple, mate. Just insert the JS file like so.
@@ -33,3 +35,15 @@ game.render();
 ### Full Documentation
 
 You can find the full documentation over [here](https://futuristiccake.github.io/canvax/)!
+
+### Install canvax
+
+```
+npm install canvaxjs
+```
+
+... and then simply include the library in your page like so...
+
+```html
+<script src="node_modules/canvaxjs/canvax.min.js"></script>
+```
