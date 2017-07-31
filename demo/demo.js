@@ -38,14 +38,14 @@ setInterval(() => {
 	var centerX = game.element.width / 2;
 	var centerY = game.element.height / 2;
 
-	if (keysDown.indexOf("w") !== -1) {
+	if (keysDown.indexOf("w") !== -1 || keysDown.indexOf("arrowup") !== -1) {
 		if (a && myRect.y < centerY) {
 			myRect.y += 0.6;
 			return;
 		}
 		myRect.y += -0.6;
 	}
-	if (keysDown.indexOf("s") !== -1) {
+	if (keysDown.indexOf("s") !== -1 || keysDown.indexOf("arrowdown") !== -1) {
 		console.log(a);
 		if (a && myRect.y > centerY) {
 			myRect.y += -0.6;
@@ -53,14 +53,14 @@ setInterval(() => {
 		}
 		myRect.y += 0.6;
 	}
-	if (keysDown.indexOf("d") !== -1) {
+	if (keysDown.indexOf("d") !== -1 || keysDown.indexOf("arrowright") !== -1) {
 		if (a && myRect.x > centerX) {
 			myRect.x += -0.6;
 			return;
 		}
 		myRect.x += 0.6;
 	}
-	if (keysDown.indexOf("a") !== -1) {
+	if (keysDown.indexOf("a") !== -1 || keysDown.indexOf("arrowleft") !== -1) {
 		if (a && myRect.x < centerX) {
 			myRect.x += 0.6;
 			return;
