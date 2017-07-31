@@ -2,7 +2,10 @@ var game = new canvax.Renderer(document.getElementById("demoCanvas"));
 
 var myRect = new canvax.Image(300, 200, 50, 100, "http://charactersheets.minotaur.cc/images/single.png");
 
+var myText = new canvax.Text(18, 40, "Welcome, player!", "30px Times New Roman", "#ECF0F1", "start", 500);
+
 game.add(myRect);
+game.add(myText);
 
 
 
@@ -14,7 +17,9 @@ function animate() {
 animate();
 
 
-
+setTimeout(() => {
+	myText.text = "Your challenge is to escape the forest.";
+}, 4000);
 
 
 
@@ -46,7 +51,6 @@ setInterval(() => {
 		myRect.y += -0.6;
 	}
 	if (keysDown.indexOf("s") !== -1 || keysDown.indexOf("arrowdown") !== -1) {
-		console.log(a);
 		if (a && myRect.y > centerY) {
 			myRect.y += -0.6;
 			return;

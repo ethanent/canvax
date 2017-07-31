@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: Ellipse</title>
+    <title>JSDoc: Class: Text</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: Ellipse</h1>
+    <h1 class="page-title">Class: Text</h1>
 
     
 
@@ -29,7 +29,7 @@
 <header>
     
         <h2><span class="attribs"><span class="type-signature"></span></span>
-            <span class="ancestors"><a href="canvax.html">canvax</a>.</span>Ellipse<span class="signature">(x, y, width, height, backgroundColor<span class="signature-attributes">opt</span>, borderColor<span class="signature-attributes">opt</span>, borderWeight<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h2>
+            <span class="ancestors"><a href="canvax.html">canvax</a>.</span>Text<span class="signature">(x, y, text, font<span class="signature-attributes">opt</span>, color<span class="signature-attributes">opt</span>, alignment<span class="signature-attributes">opt</span>, maxWidth<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h2>
         
     
 </header>
@@ -42,7 +42,7 @@
     
 
     
-    <h4 class="name" id="Ellipse"><span class="type-signature"></span>new Ellipse<span class="signature">(x, y, width, height, backgroundColor<span class="signature-attributes">opt</span>, borderColor<span class="signature-attributes">opt</span>, borderWeight<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="Text"><span class="type-signature"></span>new Text<span class="signature">(x, y, text, font<span class="signature-attributes">opt</span>, color<span class="signature-attributes">opt</span>, alignment<span class="signature-attributes">opt</span>, maxWidth<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
     
 
     
@@ -50,7 +50,7 @@
 
 
 <div class="description">
-    Returns an Ellipse entity.
+    Returns a Text entity.
 </div>
 
 
@@ -160,7 +160,7 @@
 
         <tr>
             
-                <td class="name"><code>width</code></td>
+                <td class="name"><code>text</code></td>
             
 
             <td class="type">
@@ -195,42 +195,7 @@
 
         <tr>
             
-                <td class="name"><code>height</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>backgroundColor</code></td>
+                <td class="name"><code>font</code></td>
             
 
             <td class="type">
@@ -257,19 +222,19 @@
             
                 <td class="default">
                 
-                    none
+                    30px Arial
                 
                 </td>
             
 
-            <td class="description last">Background color of entity ('none' to render no background)</td>
+            <td class="description last">Text font and size</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>borderColor</code></td>
+                <td class="name"><code>color</code></td>
             
 
             <td class="type">
@@ -301,20 +266,20 @@
                 </td>
             
 
-            <td class="description last">Border color of entity ('none' to render no border)</td>
+            <td class="description last">Text color</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>borderWeight</code></td>
+                <td class="name"><code>alignment</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">number</span>
+<span class="param-type">string</span>
 
 
             
@@ -335,12 +300,54 @@
             
                 <td class="default">
                 
-                    3
+                    start
                 
                 </td>
             
 
-            <td class="description last">Border weight of entity in space units ('0' to render no border)</td>
+            <td class="description last">Text alignment ('start', 'end', 'left', 'right', or 'center')</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>maxWidth</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+|
+
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    none
+                
+                </td>
+            
+
+            <td class="description last">Maximum width of text</td>
         </tr>
 
     
@@ -424,105 +431,36 @@
 
         <tr>
             
-                <td class="name"><code>width</code></td>
+                <td class="name"><code>text</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>alignment</code></td>
             
 
             <td class="type">
             
                 
 <span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>height</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>backgroundColor</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>borderColor</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>borderWeight</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
 
 
             
@@ -556,29 +494,6 @@
             
 
             <td class="description last">(x, y)</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>setSize</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">function</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">(width, height)</td>
         </tr>
 
     
@@ -617,7 +532,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="canvax.js.html">canvax.js</a>, <a href="canvax.js.html#line313">line 313</a>
+        <a href="canvax.js.html">canvax.js</a>, <a href="canvax.js.html#line422">line 422</a>
     </li></ul></dd>
     
 

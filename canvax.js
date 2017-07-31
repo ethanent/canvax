@@ -1,6 +1,6 @@
 /*
 
-Canvax.JS
+Canvax.JS 1.0.0
 
 License information (OMv2-FO): https://github.com/omnent/omnent-licenses/blob/master/licenses/OMv2-FO.txt
 
@@ -46,6 +46,8 @@ const canvax = {
 	*/
 	"_renderEntityToCanvas": (renderer, entity) => {
 		var ctx = renderer.ctx;
+
+		ctx.save();
 
 		switch (entity.type) {
 			case "Rectangle":
@@ -100,6 +102,7 @@ const canvax = {
 				}
 				break;
 			case "Image":
+				ctx.rotate(entity.rotation * Math.PI / 180);
 				if (canvax._imageCache.hasOwnProperty(entity.source)) {
 					var imageSource = canvax._imageCache[entity.source];
 				}
@@ -111,12 +114,20 @@ const canvax = {
 				}
 				ctx.drawImage(imageSource, entity.x, entity.y, entity.width, entity.height);
 				break;
+			case "Text":
+				ctx.fillStyle = entity.color;
+				ctx.font = entity.font;
+				ctx.textAlign = entity.alignment;
+				ctx.fillText(entity.text, entity.x, entity.y, (entity.maxWidth === "none" ? null : entity.maxWidth));
+				break;
 			case "CustomEntity":
 				entity.entityMethod(ctx, entity.properties);
 				break;
 			default:
 				break;
 		}
+
+		ctx.restore();
 	},
 	/**
 	* Renders entities to canvas by passing them to _renderEntityToCanvas
@@ -346,6 +357,7 @@ const canvax = {
 	* @param {number} width
 	* @param {number} height
 	* @param {string} source
+	* @param {number} [rotation=0] - Rotation in degrees
 	* @property {number} x - X coordinate of top left corner of image location
 	* @property {number} y - Y coordinate of top left corner of image location
 	* @property {number} width
@@ -354,7 +366,7 @@ const canvax = {
 	* @property {function} setPosition - (x, y)
 	* @property {function} setSize - (width, height)
 	*/
-	"Image": function(x, y, width, height, source) {
+	"Image": function(x, y, width, height, source, rotation) {
 		if (typeof x !== "undefined" && typeof y !== "undefined" && typeof width !== "undefined" && typeof height !== "undefined" && source) {
 			this.type = "Image";
 
@@ -363,6 +375,7 @@ const canvax = {
 			this.width = width;
 			this.height = height;
 			this.source = source;
+			this.rotation = rotation || 0;
 
 			// Update methods
 
@@ -387,6 +400,46 @@ const canvax = {
 		}
 		else {
 			throw new Error("Missing required Image configuration parameter.");
+		}
+	},
+	/**
+	* Returns a Text entity.
+	* @public
+	* @class
+	* @param {number} x
+	* @param {number} y
+	* @param {number} text
+	* @param {string} [font=30px Arial] - Text font and size
+	* @param {string} [color=#000000] - Text color
+	* @param {string} [alignment=start] - Text alignment ('start', 'end', 'left', 'right', or 'center')
+	* @param {number|string} [maxWidth=none] - Maximum width of text
+	* @property {number} x
+	* @property {number} y
+	* @property {string} text
+	* @property {number} alignment
+	* @property {function} setPosition - (x, y)
+	*/
+	"Text": function(x, y, text, font, color, alignment, maxWidth) {
+		if (typeof x !== "undefined" && typeof y !== "undefined" && typeof text !== "undefined") {
+			this.type = "Text";
+
+			this.x = x;
+			this.y = y;
+			this.maxWidth = maxWidth || "none";
+			this.font = font || "30px Arial";
+			this.text = text;
+			this.alignment = alignment || "start";
+			this.color = color || "#000000";
+
+			// Update methods
+
+			this.setPosition = (xset, yset) => {
+				this.x = xset;
+				this.y = yset;
+			};
+		}
+		else {
+			throw new Error("Missing required Text configuration parameter.");
 		}
 	},
 	/**
