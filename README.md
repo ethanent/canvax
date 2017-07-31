@@ -3,16 +3,16 @@
 
 ---
 
-[Full documentation](https://futuristiccake.github.io/canvax/) | [NPM](https://www.npmjs.com/package/canvaxjs)
+[Full documentation](https://futuristiccake.github.io/canvax/) | [GitHub](https://github.com/FuturisticCake/canvax) | [NPM](https://www.npmjs.com/package/canvaxjs)
 
 ### Use canvax
 
-It's super simple, mate. Just insert the JS file like so.
+It's really simple! Just insert the JS file like so after installing.
 
 ```html
 <!-- ... -->
 <head>
-	<script src="canvax.js" defer></script>
+	<script src="node_modules/canvaxjs/canvax.min.js" defer></script>
 </head>
 <!-- ... -->
 ```
