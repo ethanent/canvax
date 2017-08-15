@@ -3,7 +3,7 @@
 
 ---
 
-[Full documentation](https://futuristiccake.github.io/canvax/) | [GitHub](https://github.com/FuturisticCake/canvax) | [NPM](https://www.npmjs.com/package/canvaxjs)
+[Full documentation](https://ethanent.github.io/canvax/) | [GitHub](https://github.com/Ethanent/canvax) | [NPM](https://www.npmjs.com/package/canvaxjs)
 
 ### Use canvax
 
@@ -34,7 +34,7 @@ game.render();
 
 ### Full Documentation
 
-You can find the full documentation over [here](https://futuristiccake.github.io/canvax/)!
+You can find the full documentation over [here](https://ethanent.github.io/canvax/)!
 
 ### Install canvax
 

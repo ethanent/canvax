@@ -1,6 +1,6 @@
 {
   "name": "canvaxjs",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Simple, lightweight, entity-based canvas library",
   "main": "canvax.js",
   "directories": {
@@ -9,7 +9,7 @@
   "scripts": {},
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/FuturisticCake/canvax.git"
+    "url": "git+https://github.com/Ethanent/canvax.git"
   },
   "keywords": [
     "canvas",
@@ -22,7 +22,7 @@
   "author": "Ethan Davis",
   "license": "SEE LICENSE IN LICENSE.md",
   "bugs": {
-    "url": "https://github.com/FuturisticCake/canvax/issues"
+    "url": "https://github.com/Ethanent/canvax/issues"
   },
-  "homepage": "https://github.com/FuturisticCake/canvax#readme"
+  "homepage": "https://github.com/Ethanent/canvax#readme"
 }
