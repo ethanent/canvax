@@ -1,7 +1,8 @@
-# canvax
->Simple, lightweight, entity-based canvas library
+<p align="center" style="text-align: center;"><img src="" width="250" alt="canvax logo"/></p>
 
 ---
+
+>Simple, lightweight, entity-based canvas library
 
 [Full documentation](https://ethanent.github.io/canvax/) | [GitHub](https://github.com/Ethanent/canvax) | [NPM](https://www.npmjs.com/package/canvaxjs)
 
