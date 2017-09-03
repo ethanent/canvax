@@ -1,26 +1,14 @@
-<p align="center" style="text-align: center;"><img src="" width="250" alt="canvax logo"/></p>
+<p align="center" style="text-align: center;"><img src="https://raw.githubusercontent.com/ethanent/canvax/master/media/canvax-textIncluded.png" width="300" alt="canvax logo"/></p>
 
 ---
 
->Simple, lightweight, entity-based canvas library
+> Simple, lightweight, entity-based canvas library
 
 [Full documentation](https://ethanent.github.io/canvax/) | [GitHub](https://github.com/Ethanent/canvax) | [NPM](https://www.npmjs.com/package/canvaxjs)
 
-### Use canvax
+## Using canvax
 
-It's really simple! Just insert the JS file like so after installing.
-
-```html
-<!-- ... -->
-<head>
-	<script src="node_modules/canvaxjs/canvax.min.js"></script>
-</head>
-<!-- ... -->
-```
-
-### Really use Canvax
-
-Okay, so the Canvax library is really simple to use. To create a new renderer, go ahead and attach the thing to the canvas element.
+The canvax library is super simple to use. To create a new renderer, go ahead and attach a new renderer to a canvas element.
 
 ```javascript
 var game = new canvax.Renderer(document.querySelector("canvas"));
@@ -33,11 +21,7 @@ game.add(new canvax.Rectangle(0, 0, 100, 100));
 game.render();
 ```
 
-### Full Documentation
-
-You can find the full documentation over [here](https://ethanent.github.io/canvax/)!
-
-### Install canvax
+## Install canvax
 
 ```
 npm install canvaxjs
@@ -48,3 +32,7 @@ npm install canvaxjs
 ```html
 <script src="node_modules/canvaxjs/canvax.min.js"></script>
 ```
+
+## Full documentation
+
+You can find the full documentation over [here](https://ethanent.github.io/canvax/). Have a look at the full docs for detailed library usage information.
