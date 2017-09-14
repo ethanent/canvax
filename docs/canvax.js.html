@@ -29,10 +29,10 @@
             <pre class="prettyprint source linenums"><code>/**
 * Canvax library
 * @public
-* @namespace
+* @global
 */
 const canvax = {
-	"_imageCache": {},
+	'_imageCache': {},
 	/**
 	* Tests if an object is an HTMLElement
 	* @private
@@ -40,16 +40,16 @@ const canvax = {
 	* @param {Object} obj - Object to test
 	* @returns {Boolean}
 	*/
-	"_isElement": (obj) => {
+	'_isElement': (obj) => {
 		try {
-			return obj instanceof HTMLElement;
+			return obj instanceof HTMLElement
 		}
 		catch (err) {
-			return (typeof obj === "object" &amp;&amp; obj.hasOwnProperty("nodeType"));
+			return (typeof obj === 'object' &amp;&amp; obj.hasOwnProperty('nodeType'))
 		}
 	},
-	"_pointDistance": (p1, p2) => { // [x, y] format
-		return Math.sqrt(Math.pow(Math.abs(p1[0] - p2[0]), 2) + Math.pow(Math.abs(p1[1] - p2[1]), 2));
+	'_pointDistance': (p1, p2) => { // [x, y] format
+		return Math.sqrt(Math.pow(Math.abs(p1[0] - p2[0]), 2) + Math.pow(Math.abs(p1[1] - p2[1]), 2))
 	},
 	/**
 	* Renders an entity to a renderer's canvas
@@ -58,90 +58,90 @@ const canvax = {
 	* @param {canvax.Renderer} renderer
 	* @param {canvax.Rectangle|canvax.Circle} entity
 	*/
-	"_renderEntityToCanvas": (renderer, entity) => {
-		var ctx = renderer.ctx;
+	'_renderEntityToCanvas': (renderer, entity) => {
+		var ctx = renderer.ctx
 
-		ctx.save();
+		ctx.save()
 
 		switch (entity.type) {
-			case "Rectangle":
-				if (entity.backgroundColor !== "none") {
-					ctx.fillStyle = entity.backgroundColor;
-					ctx.fillRect(entity.x, entity.y, entity.width, entity.height);
+			case 'Rectangle':
+				if (entity.backgroundColor !== 'none') {
+					ctx.fillStyle = entity.backgroundColor
+					ctx.fillRect(entity.x, entity.y, entity.width, entity.height)
 				}
-				if (entity.borderWeight !== "0" &amp;&amp; entity.borderColor !== "none") {
-					ctx.strokeStyle = entity.borderColor;
-					ctx.lineWidth = entity.borderWeight;
-					ctx.strokeRect(entity.x, entity.y, entity.width, entity.height);
+				if (entity.borderWeight !== '0' &amp;&amp; entity.borderColor !== 'none') {
+					ctx.strokeStyle = entity.borderColor
+					ctx.lineWidth = entity.borderWeight
+					ctx.strokeRect(entity.x, entity.y, entity.width, entity.height)
 				}
-				break;
-			case "Circle":
-				ctx.beginPath();
-				ctx.arc(entity.x, entity.y, entity.radius, 0, 2 * Math.PI, false);
-				if (entity.backgroundColor !== "none") {
-					ctx.fillStyle = entity.backgroundColor;
-					ctx.fill();
+				break
+			case 'Circle':
+				ctx.beginPath()
+				ctx.arc(entity.x, entity.y, entity.radius, 0, 2 * Math.PI, false)
+				if (entity.backgroundColor !== 'none') {
+					ctx.fillStyle = entity.backgroundColor
+					ctx.fill()
 				}
-				if (entity.borderWeight !== "0" &amp;&amp; entity.borderColor !== "none") {
-					ctx.strokeStyle = entity.borderColor;
-					ctx.lineWidth = entity.borderWeight;
-					ctx.stroke();
+				if (entity.borderWeight !== '0' &amp;&amp; entity.borderColor !== 'none') {
+					ctx.strokeStyle = entity.borderColor
+					ctx.lineWidth = entity.borderWeight
+					ctx.stroke()
 				}
-				break;
-			case "Ellipse":
-				var kappa = .5522847493;
-				var ox = (entity.width / 2) * kappa;
-				var oy = (entity.height / 2) * kappa;
-				var xe = entity.x + entity.width;
-				var ye = entity.y + entity.height;
-				var xm = entity.x + entity.width / 2;
-				var ym = entity.y + entity.height / 2;
+				break
+			case 'Ellipse':
+				var kappa = .5522847493
+				var ox = (entity.width / 2) * kappa
+				var oy = (entity.height / 2) * kappa
+				var xe = entity.x + entity.width
+				var ye = entity.y + entity.height
+				var xm = entity.x + entity.width / 2
+				var ym = entity.y + entity.height / 2
 
-				ctx.beginPath();
-				ctx.moveTo(entity.x, ym);
-				ctx.bezierCurveTo(entity.x, ym - oy, xm - ox, entity.y, xm, entity.y);
-				ctx.bezierCurveTo(xm + ox, entity.y, xe, ym - oy, xe, ym);
-				ctx.bezierCurveTo(xe, ym + oy, xm + ox, ye, xm, ye);
-				ctx.bezierCurveTo(xm - ox, ye, entity.x, ym + oy, entity.x, ym);
-				ctx.closePath();
+				ctx.beginPath()
+				ctx.moveTo(entity.x, ym)
+				ctx.bezierCurveTo(entity.x, ym - oy, xm - ox, entity.y, xm, entity.y)
+				ctx.bezierCurveTo(xm + ox, entity.y, xe, ym - oy, xe, ym)
+				ctx.bezierCurveTo(xe, ym + oy, xm + ox, ye, xm, ye)
+				ctx.bezierCurveTo(xm - ox, ye, entity.x, ym + oy, entity.x, ym)
+				ctx.closePath()
 
-				if (entity.backgroundColor !== "none") {
-					ctx.fillStyle = entity.backgroundColor;
-					ctx.fill();
+				if (entity.backgroundColor !== 'none') {
+					ctx.fillStyle = entity.backgroundColor
+					ctx.fill()
 				}
-				if (entity.borderWeight !== "0" &amp;&amp; entity.borderColor !== "none") {
-					ctx.strokeStyle = entity.borderColor;
-					ctx.lineWidth = entity.borderWeight;
-					ctx.stroke();
+				if (entity.borderWeight !== '0' &amp;&amp; entity.borderColor !== 'none') {
+					ctx.strokeStyle = entity.borderColor
+					ctx.lineWidth = entity.borderWeight
+					ctx.stroke()
 				}
-				break;
-			case "Image":
-				ctx.rotate(entity.rotation * Math.PI / 180);
+				break
+			case 'Image':
+				ctx.rotate(entity.rotation * Math.PI / 180)
 				if (canvax._imageCache.hasOwnProperty(entity.source)) {
-					var imageSource = canvax._imageCache[entity.source];
+					var imageSource = canvax._imageCache[entity.source]
 				}
 				else {
-					var imageSource = new Image();
-					imageSource.src = entity.source;
+					var imageSource = new Image()
+					imageSource.src = entity.source
 
-					canvax._imageCache[entity.source] = imageSource;
+					canvax._imageCache[entity.source] = imageSource
 				}
-				ctx.drawImage(imageSource, entity.x, entity.y, entity.width, entity.height);
-				break;
-			case "Text":
-				ctx.fillStyle = entity.color;
-				ctx.font = entity.font;
-				ctx.textAlign = entity.alignment;
-				ctx.fillText(entity.text, entity.x, entity.y, (entity.maxWidth === "none" ? null : entity.maxWidth));
-				break;
-			case "CustomEntity":
-				entity.entityMethod(ctx, entity.properties);
-				break;
+				ctx.drawImage(imageSource, entity.x, entity.y, entity.width, entity.height)
+				break
+			case 'Text':
+				ctx.fillStyle = entity.color
+				ctx.font = entity.font
+				ctx.textAlign = entity.alignment
+				ctx.fillText(entity.text, entity.x, entity.y, (entity.maxWidth === 'none' ? null : entity.maxWidth))
+				break
+			case 'CustomEntity':
+				entity.entityMethod(ctx, entity.properties)
+				break
 			default:
-				break;
+				break
 		}
 
-		ctx.restore();
+		ctx.restore()
 	},
 	/**
 	* Renders entities to canvas by passing them to _renderEntityToCanvas
@@ -150,13 +150,13 @@ const canvax = {
 	* @param {canvax.Renderer} renderer
 	* @param {Array.&lt;canvax.Rectangle|canvax.Circle>} entities
 	*/
-	"_renderEntitiesToCanvas": (renderer, entities) => {
+	'_renderEntitiesToCanvas': (renderer, entities) => {
 		for (let i = 0; i &lt; entities.length; i++) {
-			canvax._renderEntityToCanvas(renderer, entities[i]);
+			canvax._renderEntityToCanvas(renderer, entities[i])
 		}
 	},
-	"_clearCanvas": (renderer, element) => {
-		renderer.ctx.clearRect(0, 0, element.width, element.height);
+	'_clearCanvas': (renderer, element) => {
+		renderer.ctx.clearRect(0, 0, element.width, element.height)
 	},
 	// TODO add collision detection method
 	// Renderer class
@@ -165,31 +165,55 @@ const canvax = {
 	* @public
 	* @function
 	* @param {HTMLCanvasElement} canvas - Canvas element
+	* @param {boolean} autoRender - Automatically render the canvas using window.requestAnimationFrame?
 	* @property {Array.&lt;canvax.Rectangle|canvax.Circle>} entities
 	* @property {HTMLCanvasElement} element
 	* @property {CanvasRenderingContext2D} ctx
 	* @property {function} add - (renderEntity): Adds an entity to the canvax Renderer
 	* @property {function} clear - (): Removes all entities from the canvax Renderer
 	* @property {function} render - (): Renders all entities to the Renderer canvas
+	* @property {number} fps - Current frame rate, read only.
 	*/
-	"Renderer": function(element) {
+	'Renderer': function(element, autoRender) {
 		if (canvax._isElement(element) &amp;&amp; element.getContext) {
-			this.entities = [];
-			this.element = element;
-			this.ctx = element.getContext("2d");
+			this.entities = []
+			this.element = element
+			this.ctx = element.getContext('2d')
+
 			this.add = (renderEntity) => {
-				this.entities.push(renderEntity);
-			};
-			this.clear = () => {
-				this.entities = [];
-			};
-			this.render = () => {
-				canvax._clearCanvas(this, this.element);
-				canvax._renderEntitiesToCanvas(this, this.entities);
+				this.entities.push(renderEntity)
 			}
+
+			this.clear = () => {
+				this.entities = []
+			}
+
+			this.render = () => {
+				canvax._clearCanvas(this, this.element)
+				canvax._renderEntitiesToCanvas(this, this.entities)
+				this._fpsCount++
+			}
+
+			this._fpsCount = 0
+
+			this.fps = 0
+
+			if (autoRender) {
+				this._autoRenderFrame = () => {
+					this.render()
+					window.requestAnimationFrame(this._autoRenderFrame)
+				}
+
+				this._autoRenderFrame()
+			}
+
+			setInterval(() => {
+				this.fps = this._fpsCount * 5 // Because Canvax calculates FPS every 200ms.
+				this._fpsCount = 0
+			}, 200)
 		}
 		else {
-			throw new Error("element is not a canvas element.");
+			throw new Error('element is not a canvas element.')
 		}
 	},
 	// Entities
@@ -214,42 +238,42 @@ const canvax = {
 	* @property {function} setPosition - (x, y)
 	* @property {function} setSize - (width, height)
 	*/
-	"Rectangle": function(x, y, width, height, backgroundColor, borderColor, borderWeight) {
-		if (typeof x !== "undefined" &amp;&amp; typeof y !== "undefined" &amp;&amp; typeof width !== "undefined" &amp;&amp; typeof height !== "undefined") {
-			this.type = "Rectangle";
+	'Rectangle': function(x, y, width, height, backgroundColor, borderColor, borderWeight) {
+		if (typeof x !== 'undefined' &amp;&amp; typeof y !== 'undefined' &amp;&amp; typeof width !== 'undefined' &amp;&amp; typeof height !== 'undefined') {
+			this.type = 'Rectangle'
 
-			this.x = x;
-			this.y = y;
-			this.width = width;
-			this.height = height;
+			this.x = x
+			this.y = y
+			this.width = width
+			this.height = height
 
-			this.backgroundColor = (backgroundColor || "none");
-			this.borderColor = (borderColor || "#000000");
-			this.borderWeight = (borderWeight || "0px");
+			this.backgroundColor = (backgroundColor || 'none')
+			this.borderColor = (borderColor || '#000000')
+			this.borderWeight = (borderWeight || '0px')
 
 			// Update methods
 
 			this.setPosition = (xset, yset) => {
-				this.x = xset;
-				this.y = yset;
-			};
+				this.x = xset
+				this.y = yset
+			}
 
 			this.setSize = (widthSet, heightSet) => {
-				this.width = widthSet;
-				this.height = heightSet;
-			};
+				this.width = widthSet
+				this.height = heightSet
+			}
 
 			this.getBounds = () => {
 				return {
-					"l": this.x - this.width / 2,
-					"t": this.y + this.height / 2,
-					"r": this.x + this.width / 2,
-					"b": this.y - this.height / 2,
-				};
-			};
+					'l': this.x - this.width / 2,
+					't': this.y + this.height / 2,
+					'r': this.x + this.width / 2,
+					'b': this.y - this.height / 2,
+				}
+			}
 		}
 		else {
-			throw new Error("Missing position parameter.");
+			throw new Error('Missing position parameter.')
 		}
 	},
 	/**
@@ -270,37 +294,37 @@ const canvax = {
 	* @property {string} borderWeight
 	* @property {function} setPosition - (x, y)
 	*/
-	"Circle": function(x, y, radius, backgroundColor, borderColor, borderWeight) {
-		if (typeof x !== "undefined" &amp;&amp; typeof y !== "undefined" &amp;&amp; typeof radius !== "undefined") {
-			this.type = "Circle";
+	'Circle': function(x, y, radius, backgroundColor, borderColor, borderWeight) {
+		if (typeof x !== 'undefined' &amp;&amp; typeof y !== 'undefined' &amp;&amp; typeof radius !== 'undefined') {
+			this.type = 'Circle'
 
-			this.x = x;
-			this.y = y;
-			this.radius = radius;
+			this.x = x
+			this.y = y
+			this.radius = radius
 
-			this.backgroundColor = (backgroundColor || "none");
-			this.borderColor = (borderColor || "#000000");
-			this.borderWeight = (borderWeight || "0px");
+			this.backgroundColor = (backgroundColor || 'none')
+			this.borderColor = (borderColor || '#000000')
+			this.borderWeight = (borderWeight || '0px')
 
 			// Update methods
 
 			this.setPosition = (xset, yset) => {
-				this.x = xset;
-				this.y = yset;
-			};
+				this.x = xset
+				this.y = yset
+			}
 
 			this.getBounds = () => {
-				var halfRadius = this.radius / 2;
+				var halfRadius = this.radius / 2
 				return {
-					"l": this.x - halfRadius,
-					"t": this.y + halfRadius,
-					"r": this.x + halfRadius,
-					"b": this.y - halfRadius,
-				};
-			};
+					'l': this.x - halfRadius,
+					't': this.y + halfRadius,
+					'r': this.x + halfRadius,
+					'b': this.y - halfRadius,
+				}
+			}
 		}
 		else {
-			throw new Error("Missing position parameter.");
+			throw new Error('Missing position parameter.')
 		}
 	},
 	/**
@@ -324,42 +348,42 @@ const canvax = {
 	* @property {function} setPosition - (x, y)
 	* @property {function} setSize - (width, height)
 	*/
-	"Ellipse": function(x, y, width, height, backgroundColor, borderColor, borderWeight) {
-		if (typeof x !== "undefined" &amp;&amp; typeof y !== "undefined" &amp;&amp; typeof width !== "undefined" &amp;&amp; typeof height !== "undefined") {
-			this.type = "Ellipse";
+	'Ellipse': function(x, y, width, height, backgroundColor, borderColor, borderWeight) {
+		if (typeof x !== 'undefined' &amp;&amp; typeof y !== 'undefined' &amp;&amp; typeof width !== 'undefined' &amp;&amp; typeof height !== 'undefined') {
+			this.type = 'Ellipse'
 
-			this.x = x;
-			this.y = y;
-			this.width = width;
-			this.height = height;
+			this.x = x
+			this.y = y
+			this.width = width
+			this.height = height
 
-			this.backgroundColor = (backgroundColor || "none");
-			this.borderColor = (borderColor || "#000000");
-			this.borderWeight = (borderWeight || "0px");
+			this.backgroundColor = (backgroundColor || 'none')
+			this.borderColor = (borderColor || '#000000')
+			this.borderWeight = (borderWeight || '0px')
 
 			// Update methods
 
 			this.setPosition = (xset, yset) => {
-				this.x = xset;
-				this.y = yset;
-			};
+				this.x = xset
+				this.y = yset
+			}
 
 			this.setSize = (widthSet, heightSet) => {
-				this.width = widthSet;
-				this.height = heightSet;
-			};
+				this.width = widthSet
+				this.height = heightSet
+			}
 
 			this.getBounds = () => {
 				return {
-					"l": this.x - this.width / 2,
-					"t": this.y + this.height / 2,
-					"r": this.x + this.width / 2,
-					"b": this.y - this.height / 2,
-				};
-			};
+					'l': this.x - this.width / 2,
+					't': this.y + this.height / 2,
+					'r': this.x + this.width / 2,
+					'b': this.y - this.height / 2,
+				}
+			}
 		}
 		else {
-			throw new Error("Missing position parameter.");
+			throw new Error('Missing position parameter.')
 		}
 	},
 	/**
@@ -380,40 +404,40 @@ const canvax = {
 	* @property {function} setPosition - (x, y)
 	* @property {function} setSize - (width, height)
 	*/
-	"Image": function(x, y, width, height, source, rotation) {
-		if (typeof x !== "undefined" &amp;&amp; typeof y !== "undefined" &amp;&amp; typeof width !== "undefined" &amp;&amp; typeof height !== "undefined" &amp;&amp; source) {
-			this.type = "Image";
+	'Image': function(x, y, width, height, source, rotation) {
+		if (typeof x !== 'undefined' &amp;&amp; typeof y !== 'undefined' &amp;&amp; typeof width !== 'undefined' &amp;&amp; typeof height !== 'undefined' &amp;&amp; source) {
+			this.type = 'Image'
 
-			this.x = x;
-			this.y = y;
-			this.width = width;
-			this.height = height;
-			this.source = source;
-			this.rotation = rotation || 0;
+			this.x = x
+			this.y = y
+			this.width = width
+			this.height = height
+			this.source = source
+			this.rotation = rotation || 0
 
 			// Update methods
 
 			this.setPosition = (xset, yset) => {
-				this.x = xset;
-				this.y = yset;
-			};
+				this.x = xset
+				this.y = yset
+			}
 
 			this.setSize = (widthSet, heightSet) => {
-				this.width = widthSet;
-				this.height = heightSet;
-			};
+				this.width = widthSet
+				this.height = heightSet
+			}
 
 			this.getBounds = () => {
 				return {
-					"l": this.x,
-					"t": this.y,
-					"r": this.x + this.width,
-					"b": this.y - this.height,
-				};
-			};
+					'l': this.x,
+					't': this.y,
+					'r': this.x + this.width,
+					'b': this.y - this.height,
+				}
+			}
 		}
 		else {
-			throw new Error("Missing required Image configuration parameter.");
+			throw new Error('Missing required Image configuration parameter.')
 		}
 	},
 	/**
@@ -433,27 +457,27 @@ const canvax = {
 	* @property {number} alignment
 	* @property {function} setPosition - (x, y)
 	*/
-	"Text": function(x, y, text, font, color, alignment, maxWidth) {
-		if (typeof x !== "undefined" &amp;&amp; typeof y !== "undefined" &amp;&amp; typeof text !== "undefined") {
-			this.type = "Text";
+	'Text': function(x, y, text, font, color, alignment, maxWidth) {
+		if (typeof x !== 'undefined' &amp;&amp; typeof y !== 'undefined' &amp;&amp; typeof text !== 'undefined') {
+			this.type = 'Text'
 
-			this.x = x;
-			this.y = y;
-			this.maxWidth = maxWidth || "none";
-			this.font = font || "30px Arial";
-			this.text = text;
-			this.alignment = alignment || "start";
-			this.color = color || "#000000";
+			this.x = x
+			this.y = y
+			this.maxWidth = maxWidth || 'none'
+			this.font = font || '30px Arial'
+			this.text = text
+			this.alignment = alignment || 'start'
+			this.color = color || '#000000'
 
 			// Update methods
 
 			this.setPosition = (xset, yset) => {
-				this.x = xset;
-				this.y = yset;
-			};
+				this.x = xset
+				this.y = yset
+			}
 		}
 		else {
-			throw new Error("Missing required Text configuration parameter.");
+			throw new Error('Missing required Text configuration parameter.')
 		}
 	},
 	/**
@@ -463,19 +487,19 @@ const canvax = {
 	* @param {function} customEntityMethod - (CanvasRenderingContext2D, properties)
 	* @param {Object} properties - Set of custom properties to pass to customEntityMethod on render
 	*/
-	"Entity": function(customEntityMethod, properties) {
+	'Entity': function(customEntityMethod, properties) {
 		if (customEntityMethod) {
-			this.type = "CustomEntity";
+			this.type = 'CustomEntity'
 
-			this.entityMethod = customEntityMethod;
+			this.entityMethod = customEntityMethod
 
-			this.properties = properties || {};
+			this.properties = properties || {}
 		}
 		else {
-			throw new Error("Missing entity method.");
+			throw new Error('Missing entity method.')
 		}
 	}
-};</code></pre>
+}</code></pre>
         </article>
     </section>
 
@@ -485,13 +509,13 @@ const canvax = {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="canvax.Circle.html">Circle</a></li><li><a href="canvax.Ellipse.html">Ellipse</a></li><li><a href="canvax.Entity.html">Entity</a></li><li><a href="canvax.Image.html">Image</a></li><li><a href="canvax.Rectangle.html">Rectangle</a></li><li><a href="canvax.Text.html">Text</a></li></ul><h3>Namespaces</h3><ul><li><a href="canvax.html">canvax</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="canvax.Circle.html">Circle</a></li><li><a href="canvax.Ellipse.html">Ellipse</a></li><li><a href="canvax.Entity.html">Entity</a></li><li><a href="canvax.Image.html">Image</a></li><li><a href="canvax.Rectangle.html">Rectangle</a></li><li><a href="canvax.Text.html">Text</a></li></ul><h3>Global</h3><ul><li><a href="global.html#canvax">canvax</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.3</a> on Sun Sep 03 2017 12:03:42 GMT-0700 (PDT)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.3</a> on Wed Sep 13 2017 19:52:07 GMT-0700 (PDT)
 </footer>
 
 <script> prettyPrint(); </script>

@@ -1,24 +1,18 @@
-var game = new canvax.Renderer(document.getElementById("demoCanvas"));
+var game = new canvax.Renderer(document.getElementById("demoCanvas"), true);
 
 var myRect = new canvax.Image(300, 200, 50, 100, "http://charactersheets.minotaur.cc/images/single.png");
 
-var myText = new canvax.Text(18, 40, "Welcome, player!", "30px Times New Roman", "#ECF0F1", "start", 500);
+var myText = new canvax.Text(18, 40, "Welcome, player. You must escape the forest.", "30px Times New Roman", "#ECF0F1", "start", 500);
 
 game.add(myRect);
 game.add(myText);
 
-
-
-function animate() {
-	game.render();
-	requestAnimationFrame(animate);
-}
-
-animate();
-
+console.log('Autorender on')
 
 setTimeout(() => {
-	myText.text = "Your challenge is to escape the forest.";
+	setInterval(() => {
+		myText.text = "FPS: " + game.fps;
+	}, 30);
 }, 4000);
 
 

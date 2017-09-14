@@ -1,7 +1,7 @@
 /**
 * Canvax library
 * @public
-* @namespace
+* @global
 */
 const canvax = {
 	'_imageCache': {},
@@ -137,28 +137,52 @@ const canvax = {
 	* @public
 	* @function
 	* @param {HTMLCanvasElement} canvas - Canvas element
+	* @param {boolean} autoRender - Automatically render the canvas using window.requestAnimationFrame?
 	* @property {Array.<canvax.Rectangle|canvax.Circle>} entities
 	* @property {HTMLCanvasElement} element
 	* @property {CanvasRenderingContext2D} ctx
 	* @property {function} add - (renderEntity): Adds an entity to the canvax Renderer
 	* @property {function} clear - (): Removes all entities from the canvax Renderer
 	* @property {function} render - (): Renders all entities to the Renderer canvas
+	* @property {number} fps - Current frame rate, read only.
 	*/
-	'Renderer': function(element) {
+	'Renderer': function(element, autoRender) {
 		if (canvax._isElement(element) && element.getContext) {
 			this.entities = []
 			this.element = element
 			this.ctx = element.getContext('2d')
+
 			this.add = (renderEntity) => {
 				this.entities.push(renderEntity)
 			}
+
 			this.clear = () => {
 				this.entities = []
 			}
+
 			this.render = () => {
 				canvax._clearCanvas(this, this.element)
 				canvax._renderEntitiesToCanvas(this, this.entities)
+				this._fpsCount++
 			}
+
+			this._fpsCount = 0
+
+			this.fps = 0
+
+			if (autoRender) {
+				this._autoRenderFrame = () => {
+					this.render()
+					window.requestAnimationFrame(this._autoRenderFrame)
+				}
+
+				this._autoRenderFrame()
+			}
+
+			setInterval(() => {
+				this.fps = this._fpsCount * 5 // Because Canvax calculates FPS every 200ms.
+				this._fpsCount = 0
+			}, 200)
 		}
 		else {
 			throw new Error('element is not a canvas element.')
