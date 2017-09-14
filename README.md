@@ -2,7 +2,7 @@
 
 ---
 
-> Simple, lightweight, entity-based canvas library
+> The new powerful, lightweight, entity-based canvas rendering library
 
 [Full documentation](https://ethanent.github.io/canvax/) | [GitHub](https://github.com/Ethanent/canvax) | [NPM](https://www.npmjs.com/package/canvaxjs)
 
@@ -27,7 +27,7 @@ game.render();
 npm install canvaxjs
 ```
 
-... and then simply include the library in your page like so...
+And include the following in your `<head>` tag before scripts.
 
 ```html
 <script src="node_modules/canvaxjs/canvax.min.js"></script>
