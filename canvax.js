@@ -104,7 +104,7 @@ const canvax = {
 				ctx.fillStyle = entity.color
 				ctx.font = entity.font
 				ctx.textAlign = entity.alignment
-				ctx.fillText(entity.text, entity.x, entity.y, (entity.maxWidth === 'none' ? null : entity.maxWidth))
+				ctx.fillText(entity.text, entity.x, entity.y, entity.maxWidth)
 				break
 			case 'CustomEntity':
 				entity.entityMethod(ctx, entity.properties)
@@ -435,7 +435,7 @@ const canvax = {
 
 			this.x = x
 			this.y = y
-			this.maxWidth = maxWidth || 'none'
+			if (maxWidth !== 'none') this.maxWidth = maxWidth
 			this.font = font || '30px Arial'
 			this.text = text
 			this.alignment = alignment || 'start'
