@@ -240,7 +240,24 @@ const canvax = {
 					'l': this.x - this.width / 2,
 					't': this.y + this.height / 2,
 					'r': this.x + this.width / 2,
-					'b': this.y - this.height / 2,
+					'b': this.y - this.height / 2
+				}
+			}
+
+			this.intersects = (entity) => {
+				if (entity.type === 'Rectangle' || entity.type === 'Image') {
+					const myBounds = this.getBounds()
+					const checkBounds = entity.getBounds()
+
+					return !(myBounds.t < checkBounds.b || myBounds.b > checkBounds.t || myBounds.r < checkBounds.l || myBounds.l > checkBounds.r)
+				}
+				else if (entity.type === 'Circle') {
+					// Adapted from https://yal.cc/rectangle-circle-intersection-test/
+
+					const deltaX = entity.x - Math.max(this.x, Math.min(entity.x, this.x + this.width))
+					const deltaY = entity.y - Math.max(this.y, Math.min(entity.y, this.y + this.height))
+
+					return (Math.pow(deltaX, 2) + Math.pow(deltaY, 2)) < Math.pow(entity.radius, 2)
 				}
 			}
 		}
@@ -292,6 +309,20 @@ const canvax = {
 					't': this.y + halfRadius,
 					'r': this.x + halfRadius,
 					'b': this.y - halfRadius,
+				}
+			}
+
+			this.intersects = (entity) => {
+				if (entity.type === 'Circle') {
+					return canvax._pointDistance([this.x, this.y], [entity.x, entity.y]) < this.radius + entity.radius
+				}
+				else if (entity.type === 'Rectangle' || entity.type === 'Image') {
+					// Adapted from https://yal.cc/rectangle-circle-intersection-test/
+
+					const deltaX = this.x - Math.max(entity.x, Math.min(this.x, entity.x + entity.width))
+					const deltaY = this.y - Math.max(entity.y, Math.min(this.y, entity.y + entity.height))
+
+					return (Math.pow(deltaX, 2) + Math.pow(deltaY, 2)) < Math.pow(this.radius, 2)
 				}
 			}
 		}

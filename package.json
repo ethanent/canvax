@@ -1,6 +1,6 @@
 {
   "name": "canvaxjs",
-  "version": "0.2.3",
+  "version": "0.3.0",
   "description": "Simple, lightweight, entity-based canvas library",
   "main": "canvax.js",
   "directories": {
