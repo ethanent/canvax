@@ -103,15 +103,6 @@ module.exports = class Ellipse {
 		}
 	}
 
-	getBounds () {
-		return {
-			'l': this.x - this.width / 2,
-			't': this.y + this.height / 2,
-			'r': this.x + this.width / 2,
-			'b': this.y - this.height / 2
-		}
-	}
-
 	touches (entity) {
 		throw new Error('Cannot check touches for type ' + this.type + '.')
 	}
