@@ -4,7 +4,7 @@
   "description": "The powerful entity-based canvas library",
   "main": "canvax.js",
   "scripts": {
-    "build": "node build.js"
+    "build": "node build/build.js"
   },
   "repository": {
     "type": "git",
