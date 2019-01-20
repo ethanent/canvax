@@ -9,7 +9,7 @@
   "scripts": {},
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Ethanent/canvax.git"
+    "url": "git+https://github.com/ethanent/canvax.git"
   },
   "keywords": [
     "canvas",
@@ -20,9 +20,9 @@
     "canvax"
   ],
   "author": "Ethan Davis",
-  "license": "SEE LICENSE IN LICENSE.md",
+  "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Ethanent/canvax/issues"
+    "url": "https://github.com/ethanent/canvax/issues"
   },
-  "homepage": "https://github.com/Ethanent/canvax#readme"
+  "homepage": "https://github.com/ethanent/canvax"
 }
