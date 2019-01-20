@@ -1,0 +1,59 @@
+module.exports = class Ellipse {
+	constructor (options) {
+		this.type = 'ellipse'
+
+		Object.assign(this, {
+			'x': 0,
+			'y': 0,
+			'width': 100,
+			'height': 100,
+			'backgroundColor': '#3498DB',
+			'borderColor': '#E74C3C',
+			'borderWeight': 5
+		}, options)
+	}
+
+	render (ctx) {
+		var kappa = .5522847493
+		var ox = (this.width / 2) * kappa
+		var oy = (this.height / 2) * kappa
+		var xe = this.x + this.width
+		var ye = this.y + this.height
+		var xm = this.x + this.width / 2
+		var ym = this.y + this.height / 2
+
+		ctx.beginPath()
+		ctx.moveTo(this.x, ym)
+		ctx.bezierCurveTo(this.x, ym - oy, xm - ox, this.y, xm, this.y)
+		ctx.bezierCurveTo(xm + ox, this.y, xe, ym - oy, xe, ym)
+		ctx.bezierCurveTo(xe, ym + oy, xm + ox, ye, xm, ye)
+		ctx.bezierCurveTo(xm - ox, ye, this.x, ym + oy, this.x, ym)
+		ctx.closePath()
+
+		if (typeof this.backgroundColor === 'string') {
+			ctx.fillStyle = this.backgroundColor
+
+			ctx.fill()
+		}
+
+		if (typeof this.borderColor === 'string') {
+			ctx.strokeStyle = this.borderColor
+			ctx.lineWidth = this.borderWeight
+			
+			ctx.stroke()
+		}
+	}
+
+	getBounds () {
+		return {
+			'l': this.x - this.width / 2,
+			't': this.y + this.height / 2,
+			'r': this.x + this.width / 2,
+			'b': this.y - this.height / 2
+		}
+	}
+
+	touches (entity) {
+		throw new Error('Cannot check touches for type ' + this.type + '.')
+	}
+}

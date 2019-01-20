@@ -2,23 +2,16 @@
 
 ---
 
-> The new powerful, lightweight, entity-based canvas rendering library
+> The powerful entity-based canvas rendering library
 
-[Full documentation](https://ethanent.github.io/canvax/) | [GitHub](https://github.com/Ethanent/canvax) | [NPM](https://www.npmjs.com/package/canvaxjs)
+[GitHub](https://github.com/ethanent/canvax) | [NPM](https://www.npmjs.com/package/canvaxjs)
 
 ## Using canvax
 
 The canvax library is super simple to use. To create a new renderer, go ahead and attach a new renderer to a canvas element.
 
 ```javascript
-var game = new canvax.Renderer(document.querySelector("canvas"));
-```
-
-Let's render a rectangle on the canvas. Super simple.
-
-```javascript
-game.add(new canvax.Rectangle(0, 0, 100, 100));
-game.render();
+var game = new canvax.Renderer(document.querySelector('#myCanvas'))
 ```
 
 ## Install canvax
@@ -27,12 +20,8 @@ game.render();
 npm install canvaxjs
 ```
 
-And include the following in your `<head>` tag before scripts.
+## Documentation
 
-```html
-<script src="node_modules/canvaxjs/canvax.min.js"></script>
-```
+Full documentation will be arriving soon. Docs have been removed in canvax version 0.4.0, and hopefully new ones will take their place soon enough.
 
-## Full documentation
-
-You can find the full documentation over [here](https://ethanent.github.io/canvax/). Have a look at the full docs for detailed library usage information.
+For now, though, look at the default properties in entities' model class files. (ex. [model/Rectangle.js](https://github.com/ethanent/canvax/blob/master/model/Rectangle.js))

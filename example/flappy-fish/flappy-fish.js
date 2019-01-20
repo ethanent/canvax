@@ -1,20 +1,22 @@
-var game = new canvax.Renderer(document.getElementById("gameCanvas"));
+var game = new canvax.Renderer(document.getElementById('gameCanvas'), true)
 
-var fishURL = (Math.floor(Math.random() * 2) === 1 ? "https://media.giphy.com/media/tucMx1XCeZlOo/giphy.gif" : "http://piq.codeus.net/static/media/userpics/piq_164380_400x400.png");
+var fish = new canvax.Image({
+	'x': 50,
+	'y': 600,
+	'width': 400 / 4,
+	'height': 400 / 4,
+	'source': 'http://piq.codeus.net/static/media/userpics/piq_164380_400x400.png'
+})
 
-var fish = new canvax.Rectangle(50, 600, 400 / 4, 400 / 4, fishURL);
+var fps = new canvax.Text({
+	'x': 30,
+	'y': 100,
+	'text': 'Hey',
+	'font': '80px Arial'
+})
 
-var fps = new canvax.Text(30, 100, "Hey", "80px Arial");
-
-//game.add(fps);
+game.add(fps)
 game.add(fish);
-
-var renderFrame = () => {
-	game.render();
-	requestAnimationFrame(renderFrame);
-};
-
-renderFrame();
 
 document.addEventListener("keypress", (e) => {
 	var key = e.key.toLowerCase();
@@ -36,31 +38,51 @@ setInterval(() => {
 	}
 }, 8);
 
-var Pipe = function () {
-	this.x = game.element.width + 50;
-	this.randomOffset = Math.floor(Math.random() * 100);
-	this.gapSize = 440 + Math.floor(Math.random() * 50);
-	this.rectTop = new canvax.Rectangle(this.x, this.randomOffset + this.gapSize, 120, 700, "#01C200", "#003600", 5);
-	this.rectBottom = new canvax.Rectangle(this.x, this.randomOffset - this.gapSize, 120, 700, "#01C200", "#003600", 5);
+const Pipe = class Pipe {
+	constructor () {
+		const randomOffset = Math.floor(Math.random() * 100)
+		const gapSize = 440 + Math.floor(Math.random() * 50)
 
-	setInterval(() => {
-		this.x -= 3;
-		this.rectTop.x = this.x;
-		this.rectBottom.x = this.x;
+		this.rectTop = new canvax.Rectangle({
+			'x': game.element.width + 50,
+			'y': randomOffset + gapSize,
+			'width': 120,
+			'height': 700,
+			'backgroundColor': '#01C200',
+			'borderColor': '#003600',
+			'borderWeight': 5
+		})
 
-		var tb = this.rectTop.getBounds();
+		this.rectBottom = new canvax.Rectangle({
+			'x': game.element.width + 50,
+			'y': randomOffset - gapSize,
+			'width': 120,
+			'height': 700,
+			'backgroundColor': '#01C200',
+			'borderColor': '#003600',
+			'borderWeight': 5
+		})
 
-		var bb = this.rectBottom.getBounds();
+		setInterval(() => {
+			this.rectTop.x -= 3;
+			this.rectBottom.x -= 3;
 
-		if (this.rectTop.intersects(fish) || this.rectBottom.intersects(fish)) {
-			this.x = 1000
-		}
-	}, 10);
-};
+			if (this.rectTop.touches(fish)) {
+				this.rectTop.backgroundColor = '#000000'
+			}
+
+			if (this.rectBottom.touches(fish)) {
+				this.rectBottom.backgroundColor = '#000000'
+			}
+		}, 5)
+	}
+}
+	
 
 setInterval(() => {
-	console.log("adding pipe");
+	console.log("Adding pipe.");
+
 	var pipeGen = new Pipe();
 	game.add(pipeGen.rectTop);
 	game.add(pipeGen.rectBottom);
-}, 2000);
+}, 2000)
