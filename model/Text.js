@@ -7,7 +7,8 @@ module.exports = class Text {
 			'y': 0,
 			'text': '',
 			'color': '#000000',
-			'font': '30px Arial'
+			'font': '30px Arial',
+			'alignment': 'start'
 		}, options)
 
 		// 'maxWidth' option will be undefined by default.
