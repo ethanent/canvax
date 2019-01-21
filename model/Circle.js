@@ -6,7 +6,7 @@ module.exports = class Circle {
 			'x': 0,
 			'y': 0,
 			'radius': 100,
-			'backgroundColor': '#3498DB',
+			'backgroundColor': null,
 			'borderColor': '#E74C3C',
 			'borderWeight': 0
 		}, options)

@@ -7,7 +7,7 @@ module.exports = class Ellipse {
 			'y': 0,
 			'width': 100,
 			'height': 100,
-			'backgroundColor': '#3498DB',
+			'backgroundColor': null,
 			'borderColor': '#E74C3C',
 			'borderWeight': 0
 		}, options)

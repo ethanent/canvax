@@ -11,7 +11,7 @@ module.exports = class Circle {
 			'x': 0,
 			'y': 0,
 			'radius': 100,
-			'backgroundColor': '#3498DB',
+			'backgroundColor': null,
 			'borderColor': '#E74C3C',
 			'borderWeight': 0
 		}, options)
@@ -66,7 +66,7 @@ module.exports = class Ellipse {
 			'y': 0,
 			'width': 100,
 			'height': 100,
-			'backgroundColor': '#3498DB',
+			'backgroundColor': null,
 			'borderColor': '#E74C3C',
 			'borderWeight': 0
 		}, options)
@@ -190,7 +190,7 @@ module.exports = class Rectangle {
 			'y': 0,
 			'width': 100,
 			'height': 100,
-			'backgroundColor': '#3498DB',
+			'backgroundColor': null,
 			'borderColor': '#E74C3C',
 			'borderWeight': 0
 		}, options)
@@ -291,7 +291,7 @@ module.exports = class Text {
 			'y': 0,
 			'text': '',
 			'color': '#000000',
-			'font': '30px Arial',
+			'font': '20px Arial',
 			'alignment': 'start'
 		}, options)
 
