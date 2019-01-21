@@ -8,7 +8,7 @@ module.exports = class Circle {
 			'radius': 100,
 			'backgroundColor': '#3498DB',
 			'borderColor': '#E74C3C',
-			'borderWeight': 5
+			'borderWeight': 0
 		}, options)
 	}
 
@@ -22,7 +22,7 @@ module.exports = class Circle {
 			ctx.fill()
 		}
 
-		if (typeof this.borderColor === 'string') {
+		if (typeof this.borderColor === 'string' && typeof this.borderWeight === 'number' && this.borderWeight > 0) {
 			ctx.strokeStyle = this.borderColor
 			ctx.lineWidth = this.borderWeight
 
