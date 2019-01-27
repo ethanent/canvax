@@ -276,7 +276,13 @@ module.exports = class Renderer {
 	}
 
 	_clearCanvas () {
+		this.ctx.save()
+
+		this.ctx.setTransform(1, 0, 0, 1, 0, 0)
+		
 		this.ctx.clearRect(0, 0, this.element.width, this.element.height)
+
+		this.ctx.restore()
 	}
 }
 
