@@ -110,11 +110,11 @@ module.exports = class Ellipse {
 
 build['Ellipse'] = module.exports
 
+const __canvaxImageCache = {}
+
 module.exports = class Image {
 	constructor (options) {
 		this.type = 'image'
-
-		this._imageCache = {}
 
 		Object.assign(this, {
 			'x': 0,
@@ -130,21 +130,21 @@ module.exports = class Image {
 
 		let imageSource
 
-		if (this._imageCache.hasOwnProperty(this.source)) {
-			if (this._imageCache[this.source] === false) return
+		if (__canvaxImageCache.hasOwnProperty(this.source)) {
+			if (__canvaxImageCache[this.source] === false) return
 
-			imageSource = this._imageCache[this.source]
+			imageSource = __canvaxImageCache[this.source]
 
 			ctx.drawImage(imageSource, this.x, this.y, this.width, this.height)
 		}
 		else {
-			this._imageCache[this.source] = false
+			__canvaxImageCache[this.source] = false
 
-			imageSource = new window.Image()
+			imageSource = document.createElement('img')
 			imageSource.src = this.source
 
 			imageSource.onload = () => {
-				this._imageCache[this.source] = imageSource
+				__canvaxImageCache[this.source] = imageSource
 
 				ctx.drawImage(imageSource, this.x, this.y, this.width, this.height)
 			}
