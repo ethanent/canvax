@@ -33,6 +33,10 @@ for (let i = 0; i < loaded.length; i++) {
 	console.log('Bundling ' + modules[i][1] + '...')
 
 	build += loaded[i] + '\n\nbuild[\'' + modules[i][1] + '\'] = module.exports\n\n'
+
+	if (modules[i][1] === 'Entity') {
+		build += 'const Entity = build[\'' + modules[i][1] + '\']\n\n'
+	}
 }
 
 build += 'return build\n\n})()'

@@ -1,3 +1,9 @@
+if (typeof window === 'undefined') {
+	const path = require('path')
+
+	const Entity = require(path.join(__dirname, 'Entity.js'))
+}
+
 module.exports = class Rectangle extends Entity {
 	constructor (options) {
 		super()

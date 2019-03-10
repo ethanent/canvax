@@ -1,4 +1,4 @@
-class Entity {
+module.exports = class Entity {
 	constructor () {
 		this.listeners = {
 			'mousedown': [],

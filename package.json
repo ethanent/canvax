@@ -1,6 +1,6 @@
 {
   "name": "canvaxjs",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "description": "The powerful entity-based canvas library",
   "main": "canvax.js",
   "scripts": {
@@ -24,5 +24,10 @@
     "url": "https://github.com/ethanent/canvax/issues"
   },
   "homepage": "https://github.com/ethanent/canvax",
-  "files": ["canvax.js", "model/*", "build/*", "dist/*"]
+  "files": [
+    "canvax.js",
+    "model/*",
+    "build/*",
+    "dist/*"
+  ]
 }

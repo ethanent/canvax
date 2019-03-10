@@ -3,7 +3,7 @@ const build = {}
 
 let module = {}
 
-class Entity {
+module.exports = class Entity {
 	constructor () {
 		this.listeners = {
 			'mousedown': [],
@@ -36,11 +36,21 @@ class Entity {
 
 build['Entity'] = module.exports
 
+const Entity = build['Entity']
+
+if (typeof window === 'undefined') {
+	const path = require('path')
+
+	const Entity = require(path.join(__dirname, 'Entity.js'))
+}
+
 module.exports = class Circle extends Entity {
 	constructor (options) {
 		super()
 
 		this.type = 'circle'
+
+		this.clicked = false
 
 		Object.assign(this, {
 			'x': 0,
@@ -115,11 +125,19 @@ module.exports = class Circle extends Entity {
 
 build['Circle'] = module.exports
 
+if (typeof window === 'undefined') {
+	const path = require('path')
+
+	const Entity = require(path.join(__dirname, 'Entity.js'))
+}
+
 module.exports = class Ellipse extends Entity {
 	constructor (options) {
 		super()
 
 		this.type = 'ellipse'
+
+		this.listeners = {}
 
 		Object.assign(this, {
 			'x': 0,
@@ -171,6 +189,12 @@ module.exports = class Ellipse extends Entity {
 }
 
 build['Ellipse'] = module.exports
+
+if (typeof window === 'undefined') {
+	const path = require('path')
+
+	const Entity = require(path.join(__dirname, 'Entity.js'))
+}
 
 const __canvaxImageCache = {}
 
@@ -269,6 +293,12 @@ module.exports = class Image extends Entity {
 }
 
 build['Image'] = module.exports
+
+if (typeof window === 'undefined') {
+	const path = require('path')
+
+	const Entity = require(path.join(__dirname, 'Entity.js'))
+}
 
 module.exports = class Rectangle extends Entity {
 	constructor (options) {
@@ -412,6 +442,12 @@ module.exports = class Renderer {
 }
 
 build['Renderer'] = module.exports
+
+if (typeof window === 'undefined') {
+	const path = require('path')
+
+	const Entity = require(path.join(__dirname, 'Entity.js'))
+}
 
 module.exports = class Text extends Entity {
 	constructor (options) {
