@@ -1,4 +1,4 @@
-module.exports = class Rectangle extends (Entity ? Entity : require('path').join(__dirname, 'Entity.js')) {
+module.exports = class Rectangle extends (typeof Entity === 'object' || typeof require !== 'function' ? Entity : require(require('path').join(__dirname, 'Entity.js'))) {
 	constructor (options) {
 		super()
 

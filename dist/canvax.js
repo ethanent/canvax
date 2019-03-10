@@ -38,7 +38,7 @@ build['Entity'] = module.exports
 
 const Entity = build['Entity']
 
-module.exports = class Circle extends (Entity ? Entity : require('path').join(__dirname, 'Entity.js')) {
+module.exports = class Circle extends (typeof Entity === 'object' || typeof require !== 'function' ? Entity : require(require('path').join(__dirname, 'Entity.js'))) {
 	constructor (options) {
 		super()
 
@@ -119,7 +119,7 @@ module.exports = class Circle extends (Entity ? Entity : require('path').join(__
 
 build['Circle'] = module.exports
 
-module.exports = class Ellipse extends (Entity ? Entity : require('path').join(__dirname, 'Entity.js')) {
+module.exports = class Ellipse extends (typeof Entity === 'object' || typeof require !== 'function' ? Entity : require(require('path').join(__dirname, 'Entity.js'))) {
 	constructor (options) {
 		super()
 
@@ -180,7 +180,7 @@ build['Ellipse'] = module.exports
 
 const __canvaxImageCache = {}
 
-module.exports = class Image extends (Entity ? Entity : require('path').join(__dirname, 'Entity.js')) {
+module.exports = class Image extends (typeof Entity === 'object' || typeof require !== 'function' ? Entity : require(require('path').join(__dirname, 'Entity.js'))) {
 	constructor (options) {
 		super()
 
@@ -276,7 +276,7 @@ module.exports = class Image extends (Entity ? Entity : require('path').join(__d
 
 build['Image'] = module.exports
 
-module.exports = class Rectangle extends (Entity ? Entity : require('path').join(__dirname, 'Entity.js')) {
+module.exports = class Rectangle extends (typeof Entity === 'object' || typeof require !== 'function' ? Entity : require(require('path').join(__dirname, 'Entity.js'))) {
 	constructor (options) {
 		super()
 
@@ -419,7 +419,7 @@ module.exports = class Renderer {
 
 build['Renderer'] = module.exports
 
-module.exports = class Text extends (Entity ? Entity : require('path').join(__dirname, 'Entity.js')) {
+module.exports = class Text extends (typeof Entity === 'object' || typeof require !== 'function' ? Entity : require(require('path').join(__dirname, 'Entity.js'))) {
 	constructor (options) {
 		super()
 
