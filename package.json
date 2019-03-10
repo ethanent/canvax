@@ -23,5 +23,6 @@
   "bugs": {
     "url": "https://github.com/ethanent/canvax/issues"
   },
-  "homepage": "https://github.com/ethanent/canvax"
+  "homepage": "https://github.com/ethanent/canvax",
+  "files": ["canvax.js", "model/*", "build/*", "dist/*"]
 }
