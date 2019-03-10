@@ -1,6 +1,10 @@
-module.exports = class Text {
+module.exports = class Text extends Entity {
 	constructor (options) {
+		super()
+
 		this.type = 'text'
+
+		this.listeners = {}
 
 		Object.assign(this, {
 			'x': 0,
@@ -13,6 +17,8 @@ module.exports = class Text {
 
 		// 'maxWidth' option will be undefined by default.
 	}
+
+	processCanvasEvent (e, renderer) {}
 
 	render (ctx) {
 		ctx.fillStyle = this.color

@@ -1,8 +1,12 @@
 const __canvaxImageCache = {}
 
-module.exports = class Image {
+module.exports = class Image extends Entity {
 	constructor (options) {
+		super()
+
 		this.type = 'image'
+
+		this.clicked = false
 
 		Object.assign(this, {
 			'x': 0,
@@ -11,6 +15,25 @@ module.exports = class Image {
 		}, options)
 
 		// 'width' and 'height' options will be undefined by default.
+	}
+
+	processCanvasEvent (e, renderer) {
+		const point = this.getEventPosition(e, renderer)
+
+		if (e.type === 'mousedown') {
+			if (this.touchesPoint(point)) {
+				this.emit('mousedown')
+
+				this.clicked = true
+			}
+		}
+		else if (e.type === 'mouseup') {
+			if (this.touchesPoint(point) && this.clicked) {
+				this.emit('click')
+			}
+
+			this.clicked = false
+		}
 	}
 
 	render (ctx) {
@@ -46,6 +69,10 @@ module.exports = class Image {
 			'r': this.x + this.width,
 			'b': this.y - this.height
 		}
+	}
+
+	touchesPoint (point) {
+		return point.x > this.x && point.x < this.x + this.width && point.y > this.y && point.y < this.y + this.height
 	}
 
 	touches (entity) {

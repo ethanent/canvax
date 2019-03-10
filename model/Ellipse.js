@@ -1,6 +1,10 @@
-module.exports = class Ellipse {
+module.exports = class Ellipse extends Entity {
 	constructor (options) {
+		super()
+
 		this.type = 'ellipse'
+
+		this.listeners = {}
 
 		Object.assign(this, {
 			'x': 0,
@@ -12,6 +16,8 @@ module.exports = class Ellipse {
 			'borderWeight': 0
 		}, options)
 	}
+
+	processCanvasEvent (e, renderer) {}
 
 	render (ctx) {
 		var kappa = .5522847493

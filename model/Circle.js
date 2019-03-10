@@ -1,6 +1,10 @@
-module.exports = class Circle {
+module.exports = class Circle extends Entity {
 	constructor (options) {
+		super()
+
 		this.type = 'circle'
+
+		this.clicked = false
 
 		Object.assign(this, {
 			'x': 0,
@@ -10,6 +14,25 @@ module.exports = class Circle {
 			'borderColor': '#E74C3C',
 			'borderWeight': 0
 		}, options)
+	}
+
+	processCanvasEvent (e, renderer) {
+		const point = this.getEventPosition(e, renderer)
+
+		if (e.type === 'mousedown') {
+			if (this.touchesPoint(point)) {
+				this.emit('mousedown')
+
+				this.clicked = true
+			}
+		}
+		else if (e.type === 'mouseup') {
+			if (this.touchesPoint(point) && this.clicked) {
+				this.emit('click')
+			}
+
+			this.clicked = false
+		}
 	}
 
 	render (ctx) {
@@ -28,6 +51,10 @@ module.exports = class Circle {
 
 			ctx.stroke()
 		}
+	}
+
+	touchesPoint (point) {
+		return Math.sqrt(Math.pow(this.x - point.x, 2) + Math.pow(this.y - point.y, 2)) <= this.radius
 	}
 
 	touches (entity) {

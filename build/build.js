@@ -1,8 +1,12 @@
 const path = require('path')
 const fs = require('fs')
 
-const modules = fs.readdirSync(path.join(__dirname, '..', 'model')).filter((name) => /\.js$/.test(name)).map((name) => [name, name.split(/\.js$/)[0]])
+const modules = fs.readdirSync(path.join(__dirname, '..', 'model')).filter((name) => name !== 'Entity.js' && /\.js$/.test(name)).map((name) => [name, name.split(/\.js$/)[0]])
 const loaded = []
+
+// Place Entity at front for extension by entity classes
+
+modules.unshift(['Entity.js', 'Entity'])
 
 console.log('> Removing previous build')
 

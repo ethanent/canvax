@@ -3,8 +3,43 @@ const build = {}
 
 let module = {}
 
-module.exports = class Circle {
+class Entity {
+	constructor () {
+		this.listeners = {
+			'mousedown': [],
+			'click': []
+		}
+	}
+
+	on (event, call) {
+		if (this.listeners.hasOwnProperty(event)) {
+			this.listeners[event].push(call)
+		}
+		else throw new Error('This entity does not emit event \'' + event + '\'.')
+	}
+
+	emit (event, data) {
+		for (let i = 0; i < this.listeners[event].length; i++) {
+			this.listeners[event][i](data)
+		}
+	}
+
+	getEventPosition (e, renderer) {
+		const rect = renderer.element.getBoundingClientRect()
+
+		return {
+			'x': e.clientX - rect.left,
+			'y': e.clientY - rect.top
+		}
+	}
+}
+
+build['Entity'] = module.exports
+
+module.exports = class Circle extends Entity {
 	constructor (options) {
+		super()
+
 		this.type = 'circle'
 
 		Object.assign(this, {
@@ -15,6 +50,25 @@ module.exports = class Circle {
 			'borderColor': '#E74C3C',
 			'borderWeight': 0
 		}, options)
+	}
+
+	processCanvasEvent (e, renderer) {
+		const point = this.getEventPosition(e, renderer)
+
+		if (e.type === 'mousedown') {
+			if (this.touchesPoint(point)) {
+				this.emit('mousedown')
+
+				this.clicked = true
+			}
+		}
+		else if (e.type === 'mouseup') {
+			if (this.touchesPoint(point) && this.clicked) {
+				this.emit('click')
+			}
+
+			this.clicked = false
+		}
 	}
 
 	render (ctx) {
@@ -33,6 +87,10 @@ module.exports = class Circle {
 
 			ctx.stroke()
 		}
+	}
+
+	touchesPoint (point) {
+		return Math.sqrt(Math.pow(this.x - point.x, 2) + Math.pow(this.y - point.y, 2)) <= this.radius
 	}
 
 	touches (entity) {
@@ -57,8 +115,10 @@ module.exports = class Circle {
 
 build['Circle'] = module.exports
 
-module.exports = class Ellipse {
+module.exports = class Ellipse extends Entity {
 	constructor (options) {
+		super()
+
 		this.type = 'ellipse'
 
 		Object.assign(this, {
@@ -71,6 +131,8 @@ module.exports = class Ellipse {
 			'borderWeight': 0
 		}, options)
 	}
+
+	processCanvasEvent (e, renderer) {}
 
 	render (ctx) {
 		var kappa = .5522847493
@@ -112,9 +174,13 @@ build['Ellipse'] = module.exports
 
 const __canvaxImageCache = {}
 
-module.exports = class Image {
+module.exports = class Image extends Entity {
 	constructor (options) {
+		super()
+
 		this.type = 'image'
+
+		this.clicked = false
 
 		Object.assign(this, {
 			'x': 0,
@@ -123,6 +189,25 @@ module.exports = class Image {
 		}, options)
 
 		// 'width' and 'height' options will be undefined by default.
+	}
+
+	processCanvasEvent (e, renderer) {
+		const point = this.getEventPosition(e, renderer)
+
+		if (e.type === 'mousedown') {
+			if (this.touchesPoint(point)) {
+				this.emit('mousedown')
+
+				this.clicked = true
+			}
+		}
+		else if (e.type === 'mouseup') {
+			if (this.touchesPoint(point) && this.clicked) {
+				this.emit('click')
+			}
+
+			this.clicked = false
+		}
 	}
 
 	render (ctx) {
@@ -160,6 +245,10 @@ module.exports = class Image {
 		}
 	}
 
+	touchesPoint (point) {
+		return point.x > this.x && point.x < this.x + this.width && point.y > this.y && point.y < this.y + this.height
+	}
+
 	touches (entity) {
 		if (entity.type === 'rectangle' || entity.type === 'image') {
 			const myBounds = this.getBounds()
@@ -181,9 +270,13 @@ module.exports = class Image {
 
 build['Image'] = module.exports
 
-module.exports = class Rectangle {
+module.exports = class Rectangle extends Entity {
 	constructor (options) {
+		super()
+
 		this.type = 'rectangle'
+
+		this.clicked = false
 
 		Object.assign(this, {
 			'x': 0,
@@ -194,6 +287,25 @@ module.exports = class Rectangle {
 			'borderColor': '#E74C3C',
 			'borderWeight': 0
 		}, options)
+	}
+
+	processCanvasEvent (e, renderer) {
+		const point = this.getEventPosition(e, renderer)
+
+		if (e.type === 'mousedown') {
+			if (this.touchesPoint(point)) {
+				this.emit('mousedown')
+
+				this.clicked = true
+			}
+		}
+		else if (e.type === 'mouseup') {
+			if (this.touchesPoint(point) && this.clicked) {
+				this.emit('click')
+			}
+
+			this.clicked = false
+		}
 	}
 
 	render (ctx) {
@@ -218,6 +330,10 @@ module.exports = class Rectangle {
 			'r': this.x + this.width,
 			'b': this.y - this.height
 		}
+	}
+
+	touchesPoint (point) {
+		return point.x > this.x && point.x < this.x + this.width && point.y > this.y && point.y < this.y + this.height
 	}
 
 	touches (entity) {
@@ -257,6 +373,15 @@ module.exports = class Renderer {
 
 			this._repeatRender()
 		}
+
+		this.element.addEventListener('mousedown', (e) => this.sendEvent(e))
+		this.element.addEventListener('mouseup', (e) => this.sendEvent(e))
+	}
+
+	sendEvent (e) {
+		for (let i = 0; i < this.entities.length; i++) {
+			this.entities[i].processCanvasEvent(e, this)
+		}
 	}
 
 	render () {
@@ -288,9 +413,13 @@ module.exports = class Renderer {
 
 build['Renderer'] = module.exports
 
-module.exports = class Text {
+module.exports = class Text extends Entity {
 	constructor (options) {
+		super()
+
 		this.type = 'text'
+
+		this.listeners = {}
 
 		Object.assign(this, {
 			'x': 0,
@@ -303,6 +432,8 @@ module.exports = class Text {
 
 		// 'maxWidth' option will be undefined by default.
 	}
+
+	processCanvasEvent (e, renderer) {}
 
 	render (ctx) {
 		ctx.fillStyle = this.color

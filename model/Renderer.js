@@ -14,6 +14,15 @@ module.exports = class Renderer {
 
 			this._repeatRender()
 		}
+
+		this.element.addEventListener('mousedown', (e) => this.sendEvent(e))
+		this.element.addEventListener('mouseup', (e) => this.sendEvent(e))
+	}
+
+	sendEvent (e) {
+		for (let i = 0; i < this.entities.length; i++) {
+			this.entities[i].processCanvasEvent(e, this)
+		}
 	}
 
 	render () {

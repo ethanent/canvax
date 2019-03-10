@@ -15,6 +15,10 @@ var fps = new canvax.Text({
 	'font': '80px Arial'
 })
 
+fish.on('click', () => {
+	alert('fishclick')
+})
+
 game.add(fps)
 game.add(fish);
 
@@ -63,17 +67,13 @@ const Pipe = class Pipe {
 			'borderWeight': 5
 		})
 
+		this.rectBottom.on('mousedown', () => {
+			this.rectBottom.backgroundColor = '#FFFFFF'
+		})
+
 		setInterval(() => {
 			this.rectTop.x -= 3;
 			this.rectBottom.x -= 3;
-
-			if (this.rectTop.touches(fish)) {
-				this.rectTop.backgroundColor = '#000000'
-			}
-
-			if (this.rectBottom.touches(fish)) {
-				this.rectBottom.backgroundColor = '#000000'
-			}
 		}, 5)
 	}
 }
