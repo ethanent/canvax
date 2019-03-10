@@ -1,12 +1,6 @@
-if (typeof window === 'undefined') {
-	const path = require('path')
-
-	const Entity = require(path.join(__dirname, 'Entity.js'))
-}
-
 const __canvaxImageCache = {}
 
-module.exports = class Image extends Entity {
+module.exports = class Image extends (Entity ? Entity : require('path').join(__dirname, 'Entity.js')) {
 	constructor (options) {
 		super()
 

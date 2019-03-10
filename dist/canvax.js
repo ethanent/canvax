@@ -38,13 +38,7 @@ build['Entity'] = module.exports
 
 const Entity = build['Entity']
 
-if (typeof window === 'undefined') {
-	const path = require('path')
-
-	const Entity = require(path.join(__dirname, 'Entity.js'))
-}
-
-module.exports = class Circle extends Entity {
+module.exports = class Circle extends (Entity ? Entity : require('path').join(__dirname, 'Entity.js')) {
 	constructor (options) {
 		super()
 
@@ -125,13 +119,7 @@ module.exports = class Circle extends Entity {
 
 build['Circle'] = module.exports
 
-if (typeof window === 'undefined') {
-	const path = require('path')
-
-	const Entity = require(path.join(__dirname, 'Entity.js'))
-}
-
-module.exports = class Ellipse extends Entity {
+module.exports = class Ellipse extends (Entity ? Entity : require('path').join(__dirname, 'Entity.js')) {
 	constructor (options) {
 		super()
 
@@ -190,15 +178,9 @@ module.exports = class Ellipse extends Entity {
 
 build['Ellipse'] = module.exports
 
-if (typeof window === 'undefined') {
-	const path = require('path')
-
-	const Entity = require(path.join(__dirname, 'Entity.js'))
-}
-
 const __canvaxImageCache = {}
 
-module.exports = class Image extends Entity {
+module.exports = class Image extends (Entity ? Entity : require('path').join(__dirname, 'Entity.js')) {
 	constructor (options) {
 		super()
 
@@ -294,13 +276,7 @@ module.exports = class Image extends Entity {
 
 build['Image'] = module.exports
 
-if (typeof window === 'undefined') {
-	const path = require('path')
-
-	const Entity = require(path.join(__dirname, 'Entity.js'))
-}
-
-module.exports = class Rectangle extends Entity {
+module.exports = class Rectangle extends (Entity ? Entity : require('path').join(__dirname, 'Entity.js')) {
 	constructor (options) {
 		super()
 
@@ -443,13 +419,7 @@ module.exports = class Renderer {
 
 build['Renderer'] = module.exports
 
-if (typeof window === 'undefined') {
-	const path = require('path')
-
-	const Entity = require(path.join(__dirname, 'Entity.js'))
-}
-
-module.exports = class Text extends Entity {
+module.exports = class Text extends (Entity ? Entity : require('path').join(__dirname, 'Entity.js')) {
 	constructor (options) {
 		super()
 
