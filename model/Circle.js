@@ -5,6 +5,7 @@ module.exports = class Circle extends (typeof Entity === 'object' || typeof requ
 		this.type = 'circle'
 
 		this.clicked = false
+		this.mouseOver = false
 
 		Object.assign(this, {
 			'x': 0,
@@ -32,6 +33,22 @@ module.exports = class Circle extends (typeof Entity === 'object' || typeof requ
 			}
 
 			this.clicked = false
+		}
+		else if (e.type === 'mousemove') {
+			if (this.touchesPoint(point)) {
+				if (!this.mouseOver) {
+					this.emit('mousein')
+
+					this.mouseOver = true
+				}
+			}
+			else {
+				if (this.mouseOver) {
+					this.emit('mouseout')
+
+					this.mouseOver = false
+				}
+			}
 		}
 	}
 

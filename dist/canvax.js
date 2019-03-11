@@ -7,7 +7,9 @@ module.exports = class Entity {
 	constructor () {
 		this.listeners = {
 			'mousedown': [],
-			'click': []
+			'click': [],
+			'mousein': [],
+			'mouseout': []
 		}
 	}
 
@@ -45,6 +47,7 @@ module.exports = class Circle extends (typeof Entity === 'object' || typeof requ
 		this.type = 'circle'
 
 		this.clicked = false
+		this.mouseOver = false
 
 		Object.assign(this, {
 			'x': 0,
@@ -72,6 +75,22 @@ module.exports = class Circle extends (typeof Entity === 'object' || typeof requ
 			}
 
 			this.clicked = false
+		}
+		else if (e.type === 'mousemove') {
+			if (this.touchesPoint(point)) {
+				if (!this.mouseOver) {
+					this.emit('mousein')
+
+					this.mouseOver = true
+				}
+			}
+			else {
+				if (this.mouseOver) {
+					this.emit('mouseout')
+
+					this.mouseOver = false
+				}
+			}
 		}
 	}
 
@@ -187,6 +206,7 @@ module.exports = class Image extends (typeof Entity === 'object' || typeof requi
 		this.type = 'image'
 
 		this.clicked = false
+		this.mouseOver = false
 
 		Object.assign(this, {
 			'x': 0,
@@ -213,6 +233,22 @@ module.exports = class Image extends (typeof Entity === 'object' || typeof requi
 			}
 
 			this.clicked = false
+		}
+		else if (e.type === 'mousemove') {
+			if (this.touchesPoint(point)) {
+				if (!this.mouseOver) {
+					this.emit('mousein')
+
+					this.mouseOver = true
+				}
+			}
+			else {
+				if (this.mouseOver) {
+					this.emit('mouseout')
+
+					this.mouseOver = false
+				}
+			}
 		}
 	}
 
@@ -283,6 +319,7 @@ module.exports = class Rectangle extends (typeof Entity === 'object' || typeof r
 		this.type = 'rectangle'
 
 		this.clicked = false
+		this.mouseOver = false
 
 		Object.assign(this, {
 			'x': 0,
@@ -311,6 +348,22 @@ module.exports = class Rectangle extends (typeof Entity === 'object' || typeof r
 			}
 
 			this.clicked = false
+		}
+		else if (e.type === 'mousemove') {
+			if (this.touchesPoint(point)) {
+				if (!this.mouseOver) {
+					this.emit('mousein')
+
+					this.mouseOver = true
+				}
+			}
+			else {
+				if (this.mouseOver) {
+					this.emit('mouseout')
+
+					this.mouseOver = false
+				}
+			}
 		}
 	}
 
@@ -382,6 +435,7 @@ module.exports = class Renderer {
 
 		this.element.addEventListener('mousedown', (e) => this.sendEvent(e))
 		this.element.addEventListener('mouseup', (e) => this.sendEvent(e))
+		this.element.addEventListener('mousemove', (e) => this.sendEvent(e))
 	}
 
 	sendEvent (e) {

@@ -17,6 +17,7 @@ module.exports = class Renderer {
 
 		this.element.addEventListener('mousedown', (e) => this.sendEvent(e))
 		this.element.addEventListener('mouseup', (e) => this.sendEvent(e))
+		this.element.addEventListener('mousemove', (e) => this.sendEvent(e))
 	}
 
 	sendEvent (e) {

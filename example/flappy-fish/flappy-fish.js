@@ -15,32 +15,55 @@ var fps = new canvax.Text({
 	'font': '80px Arial'
 })
 
+const testRect = new canvax.Rectangle({
+	'x': 300,
+	'y': 300,
+	'width': 200,
+	'height': 200,
+	'backgroundColor': '#FFFFFF'
+})
+
+testRect.on('mousein', () => {
+	console.log('in')
+
+	testRect.backgroundColor = '#000000'
+	game.element.style.cursor = 'pointer'
+})
+
+testRect.on('mouseout', () => {
+	console.log('out')
+
+	testRect.backgroundColor = '#FFFFFF'
+	game.element.style.cursor = 'default'
+})
+
 fish.on('click', () => {
 	alert('fishclick')
 })
 
 game.add(fps)
-game.add(fish);
+game.add(fish)
+game.add(testRect)
 
 document.addEventListener("keypress", (e) => {
-	var key = e.key.toLowerCase();
+	var key = e.key.toLowerCase()
 
 	if (key === " ") {
-		velY = 5;
+		velY = 5
 	}
-});
+})
 
-var velY = 10;
+var velY = 10
 
 setInterval(() => {
-	velY += -0.1;
+	velY += -0.1
 
-	fish.y -= velY;
+	fish.y -= velY
 
 	if (fish.y > game.element.height || fish.y < 0) {
 		//console.log("Game over!");
 	}
-}, 8);
+}, 8)
 
 const Pipe = class Pipe {
 	constructor () {
@@ -72,17 +95,17 @@ const Pipe = class Pipe {
 		})
 
 		setInterval(() => {
-			this.rectTop.x -= 3;
-			this.rectBottom.x -= 3;
+			this.rectTop.x -= 3
+			this.rectBottom.x -= 3
 		}, 5)
 	}
 }
 	
 
 setInterval(() => {
-	console.log("Adding pipe.");
+	console.log("Adding pipe.")
 
-	var pipeGen = new Pipe();
-	game.add(pipeGen.rectTop);
-	game.add(pipeGen.rectBottom);
+	var pipeGen = new Pipe()
+	game.add(pipeGen.rectTop)
+	game.add(pipeGen.rectBottom)
 }, 2000)

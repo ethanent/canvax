@@ -2,7 +2,9 @@ module.exports = class Entity {
 	constructor () {
 		this.listeners = {
 			'mousedown': [],
-			'click': []
+			'click': [],
+			'mousein': [],
+			'mouseout': []
 		}
 	}
 
