@@ -18,4 +18,10 @@ module.exports = class EventEmitter {
 		}
 		else throw new Error('This entity is not able to emit event \'' + event + '\'.')
 	}
+
+	listen (events) {
+		for (let i = 0; i < events.length; i++) {
+			this.listeners[events[i]] = []
+		}
+	}
 }

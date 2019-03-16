@@ -2,12 +2,7 @@ module.exports = class Entity extends (typeof EventEmitter === 'object' || typeo
 	constructor () {
 		super()
 
-		this.listeners = {
-			'mousedown': [],
-			'click': [],
-			'mousein': [],
-			'mouseout': []
-		}
+		this.listen(['click', 'mousedown', 'mousein', 'mouseout'])
 	}
 
 	getEventPosition (e, renderer) {

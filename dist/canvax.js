@@ -22,6 +22,12 @@ module.exports = class EventEmitter {
 		}
 		else throw new Error('This entity is not able to emit event \'' + event + '\'.')
 	}
+
+	listen (events) {
+		for (let i = 0; i < events.length; i++) {
+			this.listeners[events[i]] = []
+		}
+	}
 }
 
 build['EventEmitter'] = module.exports
@@ -89,12 +95,7 @@ module.exports = class Entity extends (typeof EventEmitter === 'object' || typeo
 	constructor () {
 		super()
 
-		this.listeners = {
-			'mousedown': [],
-			'click': [],
-			'mousein': [],
-			'mouseout': []
-		}
+		this.listen(['click', 'mousedown', 'mousein', 'mouseout'])
 	}
 
 	getEventPosition (e, renderer) {
