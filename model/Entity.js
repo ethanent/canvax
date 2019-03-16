@@ -1,23 +1,12 @@
-module.exports = class Entity {
+module.exports = class Entity extends (typeof EventEmitter === 'object' || typeof require !== 'function' ? EventEmitter : require(require('path').join(__dirname, 'EventEmitter.js'))) {
 	constructor () {
+		super()
+
 		this.listeners = {
 			'mousedown': [],
 			'click': [],
 			'mousein': [],
 			'mouseout': []
-		}
-	}
-
-	on (event, call) {
-		if (this.listeners.hasOwnProperty(event)) {
-			this.listeners[event].push(call)
-		}
-		else throw new Error('This entity does not emit event \'' + event + '\'.')
-	}
-
-	emit (event, data) {
-		for (let i = 0; i < this.listeners[event].length; i++) {
-			this.listeners[event][i](data)
 		}
 	}
 

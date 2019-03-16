@@ -1,12 +1,8 @@
 const path = require('path')
 const fs = require('fs')
 
-const modules = fs.readdirSync(path.join(__dirname, '..', 'model')).filter((name) => name !== 'Entity.js' && /\.js$/.test(name)).map((name) => [name, name.split(/\.js$/)[0]])
+const modules = ['EventEmitter', 'Renderer', 'Entity', 'Circle', 'Ellipse', 'Rectangle', 'Image', 'Text']
 const loaded = []
-
-// Place Entity at front for extension by entity classes
-
-modules.unshift(['Entity.js', 'Entity'])
 
 console.log('> Removing previous build')
 
@@ -20,23 +16,25 @@ catch (err) {
 console.log('\n> Loading modules')
 
 for (let i = 0; i < modules.length; i++) {
-	console.log('Loading ' + modules[i][1] + '...')
+	console.log('Loading ' + modules[i] + '...')
 
-	loaded.push(fs.readFileSync(path.join(__dirname, '..', 'model', modules[i][0])))
+	loaded.push(fs.readFileSync(path.join(__dirname, '..', 'model', modules[i] + '.js')))
 }
 
 console.log('\n> Building')
 
-let build = 'const canvax = (() => {\nconst build = {}\n\nlet module = {}\n\n'
+let build = `const canvax = (() => {
+	const build = {}
+
+	let module = {}
+`
 
 for (let i = 0; i < loaded.length; i++) {
-	console.log('Bundling ' + modules[i][1] + '...')
+	console.log('Bundling ' + modules[i] + '...')
 
-	build += loaded[i] + '\n\nbuild[\'' + modules[i][1] + '\'] = module.exports\n\n'
+	build += loaded[i] + '\n\nbuild[\'' + modules[i] + '\'] = module.exports\n'
 
-	if (modules[i][1] === 'Entity') {
-		build += 'const Entity = build[\'' + modules[i][1] + '\']\n\n'
-	}
+	build += 'const ' + modules[i] + ' = build[\'' + modules[i] + '\']\n\n'
 }
 
 build += 'return build\n\n})()'
