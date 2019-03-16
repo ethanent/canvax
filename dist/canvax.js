@@ -33,12 +33,18 @@ module.exports = class EventEmitter {
 build['EventEmitter'] = module.exports
 const EventEmitter = build['EventEmitter']
 
-module.exports = class Renderer {
+module.exports = class Renderer extends (typeof EventEmitter === 'object' || typeof require !== 'function' ? EventEmitter : require(require('path').join(__dirname, 'EventEmitter.js'))) {
 	constructor (element, autoRender = false) {
+		super()
+
+		this.listen(['resize'])
+
 		this.element = element
 
 		this.ctx = this.element.getContext('2d')
 		this.entities = []
+
+		this.fullPageMode = false
 
 		if (autoRender) {
 			this._repeatRender = () => {
@@ -57,7 +63,9 @@ module.exports = class Renderer {
 
 	sendEvent (e) {
 		for (let i = 0; i < this.entities.length; i++) {
-			this.entities[i].processCanvasEvent(e, this)
+			if (typeof this.entities[i] !== 'function') {
+				this.entities[i].processCanvasEvent(e, this)
+			}
 		}
 	}
 
@@ -65,16 +73,38 @@ module.exports = class Renderer {
 		this._clearCanvas()
 
 		for (let i = 0; i < this.entities.length; i++) {
-			this.entities[i].render(this.ctx)
+			if (typeof this.entities[i] === 'function') {
+				this.entities[i]().render(this.ctx)
+			}
+			else this.entities[i].render(this.ctx)
+		}
+
+		if (this.fullPageMode) {
+			if (this.element.height !== window.innerHeight || this.element.width !== window.innerWidth) {
+				this.element.height = window.innerHeight
+
+				this.element.width = window.innerWidth
+
+				this.emit('resize')
+			}
 		}
 	}
 
-	add (entity) {
+	add (entity) { // Can be Entity or dynamic entity
 		this.entities.push(entity)
 	}
 
 	clear () {
 		this.entities = []
+	}
+
+	fullPage () {
+		document.body.style.margin = '0'
+		document.body.style.padding = '0'
+
+		this.element.style.display = 'block'
+		
+		this.fullPageMode = true
 	}
 
 	_clearCanvas () {
