@@ -9,6 +9,14 @@ module.exports = class Renderer extends (typeof EventEmitter === 'object' || typ
 		this.ctx = this.element.getContext('2d')
 		this.entities = []
 
+		this._f = 0
+		this.fps = 0
+
+		setInterval(() => {
+			this.fps = this._f
+			this._f = 0
+		}, 1000)
+
 		this.fullPageMode = false
 
 		if (autoRender) {
@@ -53,10 +61,16 @@ module.exports = class Renderer extends (typeof EventEmitter === 'object' || typ
 				this.emit('resize')
 			}
 		}
+
+		this._f++
 	}
 
 	add (entity) { // Can be Entity or dynamic entity
 		this.entities.push(entity)
+	}
+
+	remove (entity) { // Can be Entity or dynamic entity
+		this.entities.splice(this.entities.indexOf(entity), 1)
 	}
 
 	clear () {
