@@ -105,7 +105,15 @@ module.exports = class Renderer extends (typeof EventEmitter === 'object' || typ
 	}
 
 	remove (entity) { // Can be Entity or dynamic entity
-		this.entities.splice(this.entities.indexOf(entity), 1)
+		const idx = this.entities.indexOf(entity)
+
+		if (idx !== -1) {
+			this.entities.splice(idx, 1)
+
+			return true
+		}
+
+		return false
 	}
 
 	clear () {
