@@ -22,6 +22,4 @@ npm install canvaxjs
 
 ## Documentation
 
-Full documentation will be arriving soon. Docs have been removed in canvax version 0.4.0, and hopefully new ones will take their place soon enough.
-
-For now, though, look at the default properties in entities' model class files. (ex. [model/Rectangle.js](https://github.com/ethanent/canvax/blob/master/model/Rectangle.js))
+Documentation is limited at the moment. For now, look at the default properties in entities' model class files. (ex. [model/Rectangle.js](https://github.com/ethanent/canvax/blob/master/model/Rectangle.js))
