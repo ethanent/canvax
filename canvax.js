@@ -10,4 +10,4 @@ import Renderer from './model/Renderer'
 
 const canvax = {Entity, Circle, Ellipse, Text, Image, Rectangle, EventEmitter, Renderer}
 
-module.exports = canvax
+export default canvax

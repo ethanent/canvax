@@ -4,7 +4,7 @@
   "description": "The powerful entity-based canvas library",
   "main": "canvax.js",
   "scripts": {
-    "build": "npx rollup canvax.js --file ./dist/canvax.js --format cjs"
+    "build": "npx rollup canvax.js --file ./dist/canvax.js --format umd --name canvax --output.name canvax"
   },
   "repository": {
     "type": "git",
