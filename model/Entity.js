@@ -1,4 +1,6 @@
-module.exports = class Entity extends (typeof EventEmitter === 'object' || typeof require !== 'function' ? EventEmitter : require(require('path').join(__dirname, 'EventEmitter.js'))) {
+import EventEmitter from "./EventEmitter"
+
+export default class Entity extends EventEmitter {
 	constructor () {
 		super()
 

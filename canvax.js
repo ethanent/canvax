@@ -1,13 +1,13 @@
-const path = require('path')
-const fs = require('fs')
+import Entity from './model/Entity'
+import Circle from './model/Circle'
+import Ellipse from './model/Ellipse'
+import Text from './model/Text'
+import Image from './model/Image'
+import Rectangle from './model/Rectangle'
 
-const modelDir = path.join(__dirname, 'model')
-const modelFiles = fs.readdirSync(modelDir).filter((name) => /\.js$/.test(name))
+import EventEmitter from './model/EventEmitter'
+import Renderer from './model/Renderer'
 
-const canvax = {}
-
-for (let i = 0; i < modelFiles.length; i++) {
-	canvax[modelFiles[i].split(/\.js$/)[0]] = require(path.join(modelDir, modelFiles[i]))
-}
+const canvax = {Entity, Circle, Ellipse, Text, Image, Rectangle, EventEmitter, Renderer}
 
 module.exports = canvax

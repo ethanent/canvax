@@ -1,6 +1,8 @@
+import Entity from "./Entity"
+
 const __canvaxImageCache = {}
 
-module.exports = class Image extends (typeof Entity === 'object' || typeof require !== 'function' ? Entity : require(require('path').join(__dirname, 'Entity.js'))) {
+export default class Image extends Entity {
 	constructor (options) {
 		super()
 

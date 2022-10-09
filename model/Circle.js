@@ -1,4 +1,6 @@
-module.exports = class Circle extends (typeof Entity === 'object' || typeof require !== 'function' ? Entity : require(require('path').join(__dirname, 'Entity.js'))) {
+import Entity from './Entity'
+
+export default class Circle extends Entity {
 	constructor (options) {
 		super()
 

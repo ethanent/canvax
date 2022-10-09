@@ -1,4 +1,6 @@
-module.exports = class Renderer extends (typeof EventEmitter === 'object' || typeof require !== 'function' ? EventEmitter : require(require('path').join(__dirname, 'EventEmitter.js'))) {
+import EventEmitter from './EventEmitter'
+
+export default class Renderer extends EventEmitter {
 	constructor (element, autoRender = false) {
 		super()
 

@@ -1,4 +1,4 @@
-module.exports = class EventEmitter {
+export default class EventEmitter {
 	constructor () {
 		this.listeners = {}
 	}
